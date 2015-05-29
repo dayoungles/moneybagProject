@@ -1,0 +1,31 @@
+package service;
+
+import model.Bag;
+import model.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import dao.BagDao;
+
+@Service
+public class BagService {
+
+	@Autowired
+	BagDao bagDao;
+	
+	public void createBag(User user, String bagInfo) {
+		bagDao.insertBag(user, bagInfo);
+	}
+
+	public Bag findBagByUserIdandInfo(int userId, String bagInfo) {
+		return bagDao.findBagByUserIdAndBagInfo(userId, bagInfo);
+		
+	}
+
+	public Bag findBagByBagId(int bagId) {
+		return bagDao.findBagByBagId(bagId);
+	}
+
+	
+}
