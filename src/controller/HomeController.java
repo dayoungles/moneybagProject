@@ -21,22 +21,22 @@ public class HomeController {
 	@Autowired
 	HomeService homeService;
 
-private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	private static final Logger logger = LoggerFactory
+			.getLogger(HomeController.class);
 
 	@RequestMapping("index")
-	public String showHome(Model model, HttpSession session){
-		User user= (User) session.getAttribute("user");
+	public String showHome(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
 		logger.debug("user:{}", user);
-		List<Bag> bagList= homeService.getEnrolledBagListById(user.getId());
+		List<Bag> bagList = homeService.getEnrolledBagListById(user.getId());
 		model.addAttribute("bagList", bagList);
 		logger.debug("bagList:{}", bagList);
 		return "/user/home";
 	}
-	
+
 	@RequestMapping("/testAjax")
-	public String showTest(){
-		
+	public String showTest() {
+
 		return "testAjax";
 	}
 }

@@ -37,15 +37,14 @@ public class UserService {
 		User resultUser = userDao.getUserByEmail(email);
 		return resultUser;
 	}
-	
 
 	public User checkLoginValidation(User user) {
-		//user정보가 있는지 확인-> isExistUser()
-		if(!isExistUser(user.getEmail())){
+		// user정보가 있는지 확인-> isExistUser()
+		if (!isExistUser(user.getEmail())) {
 			return null;
-		}else{
+		} else {
 			User foundUser = selectUserByEmail(user.getEmail());
-			if(!foundUser.getPassword().equals(user.getPassword())){
+			if (!foundUser.getPassword().equals(user.getPassword())) {
 				return null;
 			}
 			return foundUser;

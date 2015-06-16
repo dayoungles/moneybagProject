@@ -13,19 +13,18 @@ public class BagService {
 
 	@Autowired
 	BagDao bagDao;
-	
+
 	public void createBag(User user, String bagInfo) {
 		bagDao.insertBag(user, bagInfo);
 	}
 
 	public Bag findBagByUserIdandInfo(int userId, String bagInfo) {
 		return bagDao.findBagByUserIdAndBagInfo(userId, bagInfo);
-		
+
 	}
 
 	public Bag findBagByBagId(int bagId) {
 		return bagDao.findBagByBagId(bagId);
 	}
 
-	
 }

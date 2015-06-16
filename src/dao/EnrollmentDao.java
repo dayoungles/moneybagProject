@@ -14,15 +14,15 @@ public class EnrollmentDao {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
-	public void enrollUser(int userId, int bagId){
+
+	public void enrollUser(int userId, int bagId) {
 		String sql = "insert into enrollment(userId, moneybagId) values (?,?)";
 		jdbcTemplate.update(sql, userId, bagId);
 	}
-	
-	public void removeEnroll(int userId, int bagId){
-		String sql ="delete from enrollment where userId =? and moneybagId=?";
+
+	public void removeEnroll(int userId, int bagId) {
+		String sql = "delete from enrollment where userId =? and moneybagId=?";
 		jdbcTemplate.update(sql, userId, bagId);
 	}
-	
+
 }

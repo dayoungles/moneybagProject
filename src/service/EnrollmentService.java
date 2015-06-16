@@ -12,14 +12,14 @@ import dao.EnrollmentDao;
 public class EnrollmentService {
 
 	@Autowired
-	EnrollmentDao enrollDao ;
-	
-	public void enrollUser(int userId, int bagId){
+	EnrollmentDao enrollDao;
+
+	public void enrollUser(int userId, int bagId) {
 		enrollDao.enrollUser(userId, bagId);
 	}
-	
-	public void removeEnroll(User user, Bag bag){
+
+	public void removeEnroll(User user, Bag bag) {
 		enrollDao.removeEnroll(user.getId(), bag.getId());
 	}
-	
+
 }

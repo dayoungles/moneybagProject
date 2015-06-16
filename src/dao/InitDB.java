@@ -11,15 +11,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class InitDB {
-	
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
-	//이거 중복제거 하는 법은 어디서? xml설정하면 될 것 같긴 하지만서도...
+
+	// 이거 중복제거 하는 법은 어디서? xml설정하면 될 것 같긴 하지만서도...
 	@PostConstruct
 	public void initialize() {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("moneybag5.sql"));
+		populator.addScript(new ClassPathResource("moneybag_0616.sql"));
 		// DatabasePopulatorUtils.execute(populator,
 		// this.jdbctemplate.getDataSource());
 		DatabasePopulatorUtils.execute(populator, jdbcTemplate.getDataSource());

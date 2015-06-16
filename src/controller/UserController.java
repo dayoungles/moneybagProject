@@ -22,7 +22,7 @@ public class UserController {
 			.getLogger(UserController.class);
 	@Autowired
 	UserService userService;
-	
+
 	@RequestMapping(value = "/login")
 	public String login(Model model) {
 		model.addAttribute("user", new User());
@@ -30,17 +30,18 @@ public class UserController {
 	}
 
 	@RequestMapping("/loginCheck")
-	public String checkLogin(@ModelAttribute("user") User user, Model model, HttpSession session){
-		//로그인 가능한지 확인하는 함수 사용		
-		logger.debug("user:{}", user);		
-		if(userService.checkLoginValidation(user) != null){
+	public String checkLogin(@ModelAttribute("user") User user, Model model,
+			HttpSession session) {
+		// 로그인 가능한지 확인하는 함수 사용
+		logger.debug("user:{}", user);
+		if (userService.checkLoginValidation(user) != null) {
 			User foundUser = userService.selectUserByEmail(user.getEmail());
 			session.setAttribute("user", foundUser);
 			return "redirect:/index";
 		}
-		//없는 정보라는게 확인되면 어떻게 알려줄꺼야? js로 답변을 주면 될지도 모르겠다. session같은 것들은 어떻게 처리해야하는지 샘플을 살펴보자
-		return "/user/loginForm";	
+		// 없는 정보라는게 확인되면 어떻게 알려줄꺼야? js로 답변을 주면 될지도 모르겠다. session같은 것들은 어떻게
+		// 처리해야하는지 샘플을 살펴보자
+		return "/user/loginForm";
 	}
-	
-	
+
 }

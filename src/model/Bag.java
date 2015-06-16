@@ -7,24 +7,24 @@ public class Bag {
 	String createdDate;
 	String account;
 	String info;
-	String picture;//사진 정보를 뭘로 처리해야할지 모르겠음.
-	
-	Bag (int adminId, String account){
+	String picture;// 사진 정보를 뭘로 처리해야할지 모르겠음.
+
+	Bag(int adminId, String account) {
 		this.adminId = adminId;
 		this.account = account;
 	}
-	
-	Bag (int adminId, String account, String info){
+
+	Bag(int adminId, String account, String info) {
 		this.adminId = adminId;
 		this.account = account;
 		this.info = info;
 	}
-	
-	Bag (int adminId, String account, String info, String picture){
+
+	Bag(int adminId, String account, String info, String picture) {
 		this.adminId = adminId;
 		this.account = account;
 		this.info = info;
-		this. picture = picture;
+		this.picture = picture;
 	}
 
 	public Bag() {
@@ -85,6 +85,5 @@ public class Bag {
 				+ createdDate + ", account=" + account + ", info=" + info
 				+ ", picture=" + picture + "]";
 	}
-	
-	
+
 }

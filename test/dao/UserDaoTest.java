@@ -15,26 +15,26 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:/applicationContext.xml", "file:webapp/WEB-INF/tmm-servlet.xml"})
+@ContextConfiguration({ "classpath:/applicationContext.xml",
+		"file:webapp/WEB-INF/tmm-servlet.xml" })
 public class UserDaoTest {
 	@Autowired
 	DataSource datasource;
 	@Autowired
 	UserDao userdao;
-	
+
 	@Test
 	public void testApplicationContextSetting() {
-//		assertNotNull(datasource);
+		// assertNotNull(datasource);
 	}
 
-	
 	@Test
-	public void testCreateUser(){
+	public void testCreateUser() {
 		User user = new User("email", "pass", "name", "account");
-		
+
 		userdao.createUser(user);
 		User actual = userdao.getUserByEmail(user.getEmail());
-		
+
 		assertThat(actual.getEmail(), equalTo(user.getEmail()));
 	}
 

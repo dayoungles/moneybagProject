@@ -37,10 +37,12 @@ public class SignupController {
 	 * @return String "index"
 	 */
 	@RequestMapping("insert")
-	public String createUser(@ModelAttribute("user") User user, Model model, HttpSession session) {
+	public String createUser(@ModelAttribute("user") User user, Model model,
+			HttpSession session) {
 		userService.insertUser(user);
-		session.setAttribute("user", userService.selectUserByEmail(user.getEmail()));
+		session.setAttribute("user",
+				userService.selectUserByEmail(user.getEmail()));
 		return "redirect:/index";
 	}
-	
+
 }

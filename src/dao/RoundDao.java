@@ -26,8 +26,9 @@ import org.springframework.stereotype.Repository;
 public class RoundDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
-	private static final Logger logger = LoggerFactory.getLogger(RoundDao.class);
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(RoundDao.class);
 
 	private RowMapper<Round> roundMapper = new RowMapper<Round>() {
 		@Override
@@ -40,23 +41,25 @@ public class RoundDao {
 			round.setTotal(rs.getInt("total"));
 			return round;
 		};
-		
+
 	};
 
 	public List<Round> findAllRoundByBagId(int bagId) {
-		String sql ="select * from round where moneybagId=?";
-		try{
-			return jdbcTemplate.query(sql, new Object[]{bagId}, this.roundMapper);
-		}catch(EmptyResultDataAccessException e){
+		String sql = "select * from round where moneybagId=?";
+		try {
+			return jdbcTemplate.query(sql, new Object[] { bagId },
+					this.roundMapper);
+		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
 
 	}
+
 	public void createRound(Round round, User user) {
 		String sql = "insert into round (moneybagId, roundAdminId, total, info, nBang) values (?,?,?,?,?) ";
-		jdbcTemplate.update(sql, round.getMoneybagId(), user.getId(), round.getTotal(), round.getInfo(), round.isnBang());
+		jdbcTemplate.update(sql, round.getMoneybagId(), user.getId(),
+				round.getTotal(), round.getInfo(), round.isnBang());
 		logger.debug("input round");
 	}
-	
-	
+
 }

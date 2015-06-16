@@ -12,18 +12,16 @@ import dao.RoundDao;
 
 @Service
 public class RoundService {
-	
+
 	@Autowired
 	RoundDao roundDao;
 
 	public List<Round> findAllRoundByBagId(int bagId) {
 		return roundDao.findAllRoundByBagId(bagId);
 	}
-	
-	public void createRound(Round round, User user ){
+
+	public void createRound(Round round, User user) {
 		roundDao.createRound(round, user);
 	}
-	
-	
-	
+
 }

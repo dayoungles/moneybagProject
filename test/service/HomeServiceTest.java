@@ -1,4 +1,5 @@
 package service;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
@@ -22,14 +23,14 @@ public class HomeServiceTest {
 
 	@InjectMocks
 	private HomeService homeService;
-	
+
 	@Mock
 	private BagDao bagDao;
-	
+
 	@Test
 	public void testGetEnrolledMoneybag() {
 		Bag bag = new Bag();
-		List<Bag> result= bagDao.getEnrolledMoneybag(1);
+		List<Bag> result = bagDao.getEnrolledMoneybag(1);
 		System.out.println(result);
 		assertThat(homeService.getEnrolledBagListById(1), equalTo(result));
 	}

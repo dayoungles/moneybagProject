@@ -19,7 +19,7 @@ import dao.UserDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
-	
+
 	@InjectMocks
 	private UserService userService;
 	List<String> test = new ArrayList<String>();
@@ -29,23 +29,24 @@ public class UserServiceTest {
 	@Test
 	public void testCreate() {
 		User user = new User();
-//		int result = 100;
-//		when(userDao.get()).thenReturn(10);
-//		
+		// int result = 100;
+		// when(userDao.get()).thenReturn(10);
+		//
 		userService.insertUser(user);
-		
+
 		verify(userDao, times(1)).createUser(user);
-		
-//		assertThat(userService.insertUser(user), equalTo(result));
-//		assertThat(expectedArticleComment.getArticleId(), equalTo(Integer.parseInt(STR_ARTICLE_ID)));
-//		assertThat(expectedArticleComment.getUserId(), equalTo(STR_USER_ID));
-//		assertThat(expectedArticleComment.getContent(), equalTo(CONTENT));
+
+		// assertThat(userService.insertUser(user), equalTo(result));
+		// assertThat(expectedArticleComment.getArticleId(),
+		// equalTo(Integer.parseInt(STR_ARTICLE_ID)));
+		// assertThat(expectedArticleComment.getUserId(), equalTo(STR_USER_ID));
+		// assertThat(expectedArticleComment.getContent(), equalTo(CONTENT));
 	}
-	
+
 	@Test
 	public void testIsExistUser() {
-		User user = new User("test","name", "pw", "account");
-		boolean result= userService.isExistUser(user.getEmail());
+		User user = new User("test", "name", "pw", "account");
+		boolean result = userService.isExistUser(user.getEmail());
 		assertEquals(false, result);
 	}
 

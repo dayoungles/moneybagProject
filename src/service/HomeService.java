@@ -17,12 +17,12 @@ public class HomeService {
 
 	@Autowired
 	BagDao bagDao;
-	
+
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeService.class);
 
 	public List<Bag> getEnrolledBagListById(int userId) {
-		List<Bag> bagList= bagDao.getEnrolledMoneybag(userId);
+		List<Bag> bagList = bagDao.getEnrolledMoneybag(userId);
 		return bagList;
 	}
 }

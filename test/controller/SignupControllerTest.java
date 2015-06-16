@@ -15,11 +15,13 @@ import dao.UserDao;
 public class SignupControllerTest {
 	@Autowired
 	UserDao userDao;
-	
+
 	@Test
 	public void testCreateUser() {
-		ApplicationContext ctx = new AnnotationConfigApplicationContext("controller.signupcontroller");
-		SignupController sc = ctx.getBean("signupController", SignupController.class);
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(
+				"controller.signupcontroller");
+		SignupController sc = ctx.getBean("signupController",
+				SignupController.class);
 	}
 
 }
