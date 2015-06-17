@@ -1,7 +1,11 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
+import model.FileUpload;
 import model.User;
 
 import org.slf4j.Logger;
@@ -13,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import service.UserService;
-import dao.UserDao;
 
 @Controller
 @RequestMapping("/signup")
@@ -38,7 +41,26 @@ public class SignupController {
 	 */
 	@RequestMapping("insert")
 	public String createUser(@ModelAttribute("user") User user, Model model,
-			HttpSession session) {
+			HttpSession session, FileUpload upload) {
+		
+		if(upload.getFile() == null || upload.getFile().getSize() == 0){
+			upload.setName(0);
+		} else {
+			upload.setName(user.getId());
+		}
+		File file = new File("/userImg/"+ upload.getName());
+		
+		try {
+			upload.getFile().transferTo(file);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		user.setFileName(upload.getName());
 		userService.insertUser(user);
 		session.setAttribute("user",
 				userService.selectUserByEmail(user.getEmail()));

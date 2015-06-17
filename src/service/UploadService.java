@@ -3,7 +3,7 @@ package service;
 import java.io.File;
 import java.io.IOException;
 
-import model.Upload;
+import model.FileUpload;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
