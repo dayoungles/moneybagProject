@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import model.FileUpload;
@@ -42,6 +45,7 @@ public class SignupController {
 	 * //	
 	 * @return String "index"
 	 */
+
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String createUser(User user, FileUpload upfile, Model model,
 			HttpSession session) {
@@ -66,9 +70,6 @@ public class SignupController {
 	public String testInsert(User user, FileUpload file, Model model, HttpSession session){
 		logger.debug("user:{}", user);//잘 나옴. 빈 객체가 문제가 아님. 
 		logger.debug("file:{}", file);
-		
-		return "redirect:/index";
 	}
-	
 
 }
