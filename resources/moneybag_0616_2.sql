@@ -11,7 +11,7 @@ USE `moneybag` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `moneybag`.`s` ;
 
-CREATE  TABLE IF NOT EXISTS `moneybag`.`s` (
+CREATE  TABLE IF NOT EXISTS `moneybag`.`user` (
   `userId` INT NOT NULL AUTO_INCREMENT ,
   `email` VARCHAR(45) NULL ,
   `pw` VARCHAR(45) NULL ,

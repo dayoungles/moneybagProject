@@ -39,9 +39,9 @@ public class UserDao {
 	};
 
 	public void createUser(User user) {
-		String sql = "INSERT INTO user (email, pw, name) values (?,?,?);";
+		String sql = "INSERT INTO user (email, pw, name, fileName) values (?, ?, ?, ?);";
 		jdbctemplate.update(sql, user.getEmail(), user.getPassword(),
-				user.getName());
+				user.getName(), user.getFileName());
 	}
 
 	public User getUserByEmail(String email) {

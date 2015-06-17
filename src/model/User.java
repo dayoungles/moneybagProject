@@ -8,7 +8,7 @@ public class User {
 	private String name;
 	private int id;
 	private String account;
-
+	private String fileName;
 	public User() {
 
 	}
@@ -64,10 +64,19 @@ public class User {
 		this.account = account;
 	}
 
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", name="
-				+ name + ", id=" + id + ", account=" + account + "]";
+				+ name + ", id=" + id + ", account=" + account + ", fileName="
+				+ fileName + "]";
 	}
 
 }
