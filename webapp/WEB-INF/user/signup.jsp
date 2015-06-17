@@ -9,11 +9,18 @@
 </head>
 <body>
 	signup page<br/>
-	<form:form method="post" action="/signup/insert" modelAttribute="user">
-		email:<form:input path="email"/>
-		password<form:password path="password"/>
-		name:<form:input path="name"/>
-		<button type="submit">submit </button>
-	</form:form>
+	<form method="post" action="/signup/testinsert" enctype="multipart/form-data">
+		<!-- user -->
+		email:<input type="text" name="email"/>
+		password<input type="text" name="password"/>
+		name:<input type="text" name="name"/>
+		account:<input type="text" name="account"/>
+		
+		<!-- image upload --> 
+		대표 이미지: <input type="file" name="multipartFile"/>
+		<input type="hidden" name="nameOfmf" value="test"/>
+		
+		<input type="submit" name="submit" value="submit"/> 
+	</form>
 </body>
 </html>

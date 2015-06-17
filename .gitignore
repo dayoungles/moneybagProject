@@ -1,6 +1,7 @@
 /build
 /target
 /bin
-.classpath
 .settings
 .project
+/webapp/WEB-INF/classes
+/tomcat.8080
