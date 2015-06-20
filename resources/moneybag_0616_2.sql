@@ -7,11 +7,11 @@ CREATE SCHEMA IF NOT EXISTS `moneybag` DEFAULT CHARACTER SET utf8 COLLATE utf8_g
 USE `moneybag` ;
 
 -- -----------------------------------------------------
--- Table `moneybag`.`s`
+-- Table `moneybag`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `moneybag`.`s` ;
+DROP TABLE IF EXISTS `moneybag`.`user` ;
 
-CREATE  TABLE IF NOT EXISTS `moneybag`.`s` (
+CREATE  TABLE IF NOT EXISTS `moneybag`.`user` (
   `userId` INT NOT NULL AUTO_INCREMENT ,
   `email` VARCHAR(45) NULL ,
   `pw` VARCHAR(45) NULL ,
@@ -38,7 +38,7 @@ CREATE  TABLE IF NOT EXISTS `moneybag`.`moneybag` (
   INDEX `fk_moneybag_user1_idx` (`admin` ASC) ,
   CONSTRAINT `fk_moneybag_user1`
     FOREIGN KEY (`admin` )
-    REFERENCES `moneybag`.`s` (`userId` )
+    REFERENCES `moneybag`.`user` (`userId` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -86,7 +86,7 @@ CREATE  TABLE IF NOT EXISTS `moneybag`.`enrollment` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_moneybag_has_user_user1`
     FOREIGN KEY (`userId` )
-    REFERENCES `moneybag`.`s` (`userId` )
+    REFERENCES `moneybag`.`user` (`userId` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -107,7 +107,7 @@ CREATE  TABLE IF NOT EXISTS `moneybag`.`team` (
   INDEX `fk_user_has_team_round1_idx` (`roundId` ASC) ,
   CONSTRAINT `fk_user_has_team_user1`
     FOREIGN KEY (`userId` )
-    REFERENCES `moneybag`.`s` (`userId` )
+    REFERENCES `moneybag`.`user` (`userId` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_has_team_round1`
