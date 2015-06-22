@@ -14,16 +14,12 @@ public class UploadService {
 
 	
 
-	public FileUpload fileSetting(FileUpload upfile, int userId) {
-		if(upfile.getFile() == null || upfile.getFile().getSize() == 0){
-			upfile.setName(0);
-		} else {
-			upfile.setName(userId);
-		}
-		File file = new File("/userImg/"+ upfile.getName());
+	public FileUpload fileSetting(MultipartFile mfile) {
 		
+		FileUpload upload = new FileUpload(mfile);
+		File file = new File("/userImg/"+ upload.getName());
 		try {
-			upfile.getFile().transferTo(file);
+			mfile.transferTo(file);
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,8 +27,10 @@ public class UploadService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return upfile;
-				
+		
+		return upload;
+		
+		
 	}
 	
 	

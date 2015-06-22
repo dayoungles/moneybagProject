@@ -9,7 +9,7 @@
 </head>
 <body>
 	signup page<br/>
-	<form method="post" action="/signup/testinsert" enctype="multipart/form-data">
+	<form method="post" action="/signup/insert" enctype="multipart/form-data">
 		<!-- user -->
 		email:<input type="text" name="email"/>
 		password<input type="text" name="password"/>

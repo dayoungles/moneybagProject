@@ -47,29 +47,20 @@ public class SignupController {
 	 */
 
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String createUser(User user, FileUpload upfile, Model model,
+	public String createUser(User user, @RequestParam("multipartFile") MultipartFile file, Model model,
 			HttpSession session) {
-		logger.debug("user:{}", user);
-		logger.debug("file:{}", upfile);
-//		FileUpload upload = new FileUpload(file);
-//		if(!userService.isExistUser(user.getEmail())){
-//			return "/user/login";//재가입 시켜 이메일 중복이라고. 알림 띄워줘야 된다는.  
-//		}
-//		logger.debug("FileUpload:{}", upfile);
-//		userService.insertUser(user);
-//		uploadService.fileSetting(upfile, user.getId());
-//		user.setFileName(upload.getName());//getName궁금. 
+		logger.debug("file:{}", file.toString() );
+		if(userService.isExistUser(user.getEmail())){
+			return "/user/login";//재가입 시켜 이메일 중복이라고. 알림 띄워줘야 된다는.  
+		}		
+		FileUpload upload = uploadService.fileSetting(file);
+		user.setFileName(upload.getName());
+		userService.insertUser(user);
 		
-//		userService.modifyUser();
-//		session.setAttribute("user",
-//				userService.selectUserByEmail(user.getEmail()));
+		session.setAttribute("user",
+				userService.selectUserByEmail(user.getEmail()));
 		return "redirect:/index";
 	}
 	
-	@RequestMapping(value="/testinsert", method=RequestMethod.POST)
-	public String testInsert(User user, FileUpload file, Model model, HttpSession session){
-		logger.debug("user:{}", user);//잘 나옴. 빈 객체가 문제가 아님. 
-		logger.debug("file:{}", file);
-	}
 
 }
