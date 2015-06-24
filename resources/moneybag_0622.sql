@@ -25,7 +25,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`moneybag`
 -- -----------------------------------------------------
-
+DROP TABLE IF EXISTS `moneybag`.`moneybag` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`moneybag` (
   `moneybagId` INT NOT NULL AUTO_INCREMENT ,
