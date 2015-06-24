@@ -19,7 +19,12 @@ public class InitDB {
 	@PostConstruct
 	public void initialize() {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("moneybag_0616_3.sql"));
+
+		populator.addScript(new ClassPathResource("moneybag_0622.sql"));
+		
+		//샘플 코드 
+		//populator.addScript(new ClassPathResource("sample.sql"));
+
 		// DatabasePopulatorUtils.execute(populator,
 		// this.jdbctemplate.getDataSource());
 		DatabasePopulatorUtils.execute(populator, jdbcTemplate.getDataSource());

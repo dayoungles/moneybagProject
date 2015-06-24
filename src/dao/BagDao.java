@@ -40,7 +40,7 @@ public class BagDao {
 															// 가지고 올지?
 			bag.setId(rs.getInt("moneybagId"));
 			bag.setInfo(rs.getString("info"));
-			bag.setPicture(rs.getString("picture"));
+			bag.setPicture(rs.getString("fileName"));
 			return bag;
 		};
 
