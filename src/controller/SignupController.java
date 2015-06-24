@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.FileUpload;
@@ -48,15 +49,24 @@ public class SignupController {
 
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String createUser(User user, @RequestParam("multipartFile") MultipartFile file, Model model,
-			HttpSession session) {
-		logger.debug("file:{}", file.toString() );
+			HttpSession session, HttpServletRequest request) {
 		if(userService.isExistUser(user.getEmail())){
-			return "/user/login";//재가입 시켜 이메일 중복이라고. 알림 띄워줘야 된다는.  
-		}		
-		FileUpload upload = uploadService.fileSetting(file);
+			return "이미 가입된 이메일입니다.";//물론 이렇게 하면 에러가 납니다 ^_^  requestBody를 이용해서 js로 처리하는 방법을 봐야 합니다. 
+		}
+		if(uploadService.isImgFile(file) == false){
+			return "이미지 파일만 입력 가능합니다";
+		}
+		String realPath = request.getSession().getServletContext()
+				.getRealPath("/");
+		realPath += "../userImg/";
+		
+		FileUpload upload = uploadService.fileSetting(file, realPath);
+		
 		user.setFileName(upload.getName());
 		userService.insertUser(user);
 		
+		//다음 페이지를 위한 작업 
+		model.addAttribute(user);
 		session.setAttribute("user",
 				userService.selectUserByEmail(user.getEmail()));
 		return "redirect:/index";

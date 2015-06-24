@@ -6,19 +6,19 @@ import java.util.Date;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUpload {
-	private static final String DEFAULT = "default.png";
-	private static final int ZERO = 0;
+	private final String DEFAULT = "default.png";
+	private final int ZERO = 0;
+	private final int IMAGE_LENGTH = 6; //string "image/"를 잘라내기 위한 고정사이즈  
 	
 	private MultipartFile multipartFile;
 	private String nameOfmf;
-	private String fileType;
 	
 	public FileUpload(){
 		
 	}
 	public FileUpload(MultipartFile file2) {
 		this.multipartFile = file2;
-		this.fileType = file2.getContentType();
+		
 		if(file2.getSize() == 0){
 			this.nameOfmf = DEFAULT;
 		}else {
@@ -27,13 +27,6 @@ public class FileUpload {
 		
 	}
 	
-	private boolean checkFileType(){
-		String type = this.multipartFile.getContentType();
-		if(type!= "jpg"|| type!="jpeg" || type!="png"|| type !="bmp"){
-			return false;
-		}
-		return true;
-	}
 	
 	public MultipartFile getFile() {
 		return multipartFile;
@@ -48,13 +41,15 @@ public class FileUpload {
 	}
 	
 	/**
-	 * 파일 이름 중복 제거를 위해 파일 업로드 시각+ user name 으로 파일 이름을 다시 지정한다. 
+	 * 파일 이름 중복 제거를 위해 파일 업로드 시각 으로 파일 이름을 다시 지정한다. 
 	 */
 	public void setName() {
 		Date now = new Date();
-		SimpleDateFormat date = new SimpleDateFormat("yy-MM-dd_hh:mm:ss.SSS");
+		SimpleDateFormat date = new SimpleDateFormat("yy-MM-dd_HH:mm:ss:SSS");
 		date.format(now);
-		this.nameOfmf= date.format(now);
+		String contentType = this.multipartFile.getContentType();
+		contentType = contentType.substring(IMAGE_LENGTH, contentType.length());
+		this.nameOfmf= date.format(now) +"."+ contentType;
 	}
 	
 	@Override

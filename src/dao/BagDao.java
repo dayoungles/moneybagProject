@@ -63,7 +63,7 @@ public class BagDao {
 	 * @return
 	 */
 	public List<Bag> getEnrolledMoneybag(int userId) {
-		String sql = "select * from moneybag join enrollment on moneybag.moneybagId = enrollment.moneybagId where enrollment.userId=?";
+		String sql = "select * from moneybag join user_moneybag_mapping on moneybag.moneybagId = user_moneybag_mapping.moneybagId where user_moneybag_mapping.userId=?";
 		try {
 			return jdbcTemplate.query(sql, new Object[] { userId }, bagMapper);
 		} catch (EmptyResultDataAccessException e) {

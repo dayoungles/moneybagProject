@@ -1,4 +1,12 @@
 var util = new Util();
+
+util.ajax.get("http://www.jkdl", function(data){
+	
+})
+
+util.ajax({method: "get", url: ""});
+
+
 var elImg = document.getElementsById("imgPos");
 console.log(elImg+"              /////////////////test");
 debugger;
