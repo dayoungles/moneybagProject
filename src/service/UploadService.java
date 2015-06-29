@@ -14,11 +14,13 @@ public class UploadService {
 
 	public FileUpload fileSetting(MultipartFile mfile, String realPath) {
 
+		//file을 업로드 하려고 하는 폴더가 없으면 만들어준다. 
+		File folder = new File(realPath);
+		if(!folder.exists()){
+			folder.mkdir();
+		}
+		
 		FileUpload upload = new FileUpload(mfile);
-		/*
-		 * maven profile, spring environment
-		 * local에서 사용하는 설정파일과 실서버에서 사용하는 설정 파일을 따로 설정할 수 있음.
-		 */
 		File file = new File(realPath + upload.getName());//
 		try {
 			mfile.transferTo(file);
