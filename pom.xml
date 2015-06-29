@@ -12,6 +12,7 @@
 
 		<org.springframework.version>4.1.6.RELEASE</org.springframework.version>
 		<tomcat.version>8.0.20</tomcat.version>
+		<hibernate.version>5.1.1.Final</hibernate.version>
 	</properties>
 
 	<dependencies>
@@ -160,6 +161,19 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
+		</dependency>
+
+		<!-- validation 사용 -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

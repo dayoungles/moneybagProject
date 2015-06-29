@@ -11,6 +11,7 @@ USE `moneybag` ;
 -- -----------------------------------------------------
 
 
+
 CREATE  TABLE IF NOT EXISTS `moneybag`.`user` (
   `userId` INT NOT NULL AUTO_INCREMENT ,
   `email` VARCHAR(45) NULL ,

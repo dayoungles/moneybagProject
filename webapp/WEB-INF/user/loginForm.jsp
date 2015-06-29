@@ -9,10 +9,8 @@
 </head>
 <body>
 	<form:form modelAttribute="user" method="post" action="/user/loginCheck">	
-	email:<form:input path="email" />
-	pw:<form:password path="password" />
-	name:<form:input path="name" />
-	account:<form:input path="account"/>
+		email:<form:input path="email" />
+		pw:<form:password path="password" />
 	<button type="submit">제출</button>
 	</form:form>
 </body>

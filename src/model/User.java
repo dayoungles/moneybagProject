@@ -1,12 +1,23 @@
 package model;
 
-import org.springframework.stereotype.Component;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+
 
 public class User {
+	
+	@Email @NotEmpty 
 	private String email;
+	@Size(min=8, max=20)
 	private String password;
+	@Size(min=20) @NotEmpty
 	private String name;
 	private int id;
+	@NotEmpty @Pattern(regexp="[0-9]")
 	private String account;
 	private String fileName;
 	public User() {

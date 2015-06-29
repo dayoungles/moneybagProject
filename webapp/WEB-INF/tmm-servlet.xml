@@ -12,7 +12,9 @@
 	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
 	<mvc:resources location="/img/" mapping="/img/**"></mvc:resources>
-	<mvc:resources location="/../userImg/" mapping="/userImg/**"></mvc:resources>
+	<mvc:resources location="/userImg/" mapping="/userImg/**"></mvc:resources> 
+	<!-- <mvc:resources location="classpath:/userImg/" mapping="/userImg/**"></mvc:resources> 
+	webapp과 같은 레이어에 있는 폴더인 userImg에 접근할 수 없는 것 같다. 어떻게 해야하지? -->
 	
 	<context:component-scan base-package="controller"/>
 	<context:component-scan base-package="dao"/>
