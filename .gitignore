@@ -6,3 +6,4 @@
 /webapp/WEB-INF/classes
 /tomcat.8080
 /userImg
+/webapp/WEB-INF/.gitignore
