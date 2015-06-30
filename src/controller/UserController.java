@@ -43,5 +43,11 @@ public class UserController {
 		// 처리해야하는지 샘플을 살펴보자
 		return "/user/loginForm";
 	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "redirect:/user/login";
+	}
 
 }

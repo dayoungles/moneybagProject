@@ -17,4 +17,5 @@
 		<img src="userImg/${user.fileName}" width="30px" height="30px"/>
 	</div>
 	<div class="menu" id="userInfo">${user.name} 님 </div>
+	<div class="menu" id="logout"><a href="/user/logout"><button>logout</button></a></div>
 	</header>
