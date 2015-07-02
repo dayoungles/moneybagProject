@@ -7,3 +7,4 @@
 /tomcat.8080
 /userImg
 /webapp/WEB-INF/.gitignore
+/.classpath
