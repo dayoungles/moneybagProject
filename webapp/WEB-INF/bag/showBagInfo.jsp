@@ -5,10 +5,10 @@
 <container>
 <div class="bagArea">
 	<div class="info">${bag.info}</div>
-	<a href="/roundForm/${bag.id}"><button>새로운 모금 회차 생성</button></a>
-	<c:forEach var="round" items="${roundList}">
-		<div class="round">
-			날짜: ${round.createdDate}<br /> 사용금액: ${round.total}<br />
+	<a href="/bill/form/${bag.id}"><button>새로운 사용내역 등록하기</button></a>
+	<c:forEach var="bill" items="${billList}">
+		<div class="bill">
+			날짜: ${bill.createdDate}<br /> 사용금액:<br />
 		</div>
 	</c:forEach>
 

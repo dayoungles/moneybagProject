@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import model.Bag;
-import model.Round;
+import model.Bill;
 import model.User;
 
 import org.slf4j.Logger;
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import service.BagService;
-import service.EnrollmentService;
-import service.RoundService;
+import service.UserBagMappingService;
+import service.BillService;
 import service.UserService;
 
 @Controller
@@ -33,13 +33,13 @@ public class BagController {
 	BagService bagService;
 
 	@Autowired
-	EnrollmentService enrollService;
+	UserBagMappingService enrollService;
 
 	@Autowired
 	UserService userService;
 
 	@Autowired
-	RoundService roundService;
+	BillService billService;
 
 	@RequestMapping("/moneybagForm")
 	public String moneybagForm() {
@@ -89,28 +89,14 @@ public class BagController {
 	public String showBag(@PathVariable("bagId") int bagId,
 			HttpSession session, Model model) {
 		Bag bag = bagService.findBagByBagId(bagId);
-		List<Round> roundList = roundService.findAllRoundByBagId(bagId);
-		model.addAttribute("roundList", roundList);
+		List<Bill> billList = billService.findAllBillsByBagId(bagId);
+		model.addAttribute("billList", billList);
 		model.addAttribute("bag", bag);
 		return "/bag/showBagInfo";
 	}
 
-	@RequestMapping("roundForm/{bagId}")
-	public String createForm(Model model, @PathVariable("bagId") String bagId) {
-		model.addAttribute("bagId", bagId);
-		model.addAttribute("round", new Round());
-		return "/bag/roundForm";
-	}
 
-	@RequestMapping("inputRound/{bagId}")
-	public String createRound(@PathVariable("bagId") String bagId,
-			@ModelAttribute("round") Round round, Model model,
-			HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		round.setMoneybagId(Integer.parseInt(bagId));
-		roundService.createRound(round, user);
-		model.addAttribute("bagId", bagId);
-		return "redirect:/showBag/" + bagId;
-	}
+
+
 
 }
