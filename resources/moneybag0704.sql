@@ -2,15 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-
 CREATE SCHEMA IF NOT EXISTS `moneybag` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `moneybag` ;
 
 -- -----------------------------------------------------
 -- Table `moneybag`.`user`
 -- -----------------------------------------------------
-
-
+DROP TABLE IF EXISTS `moneybag`.`user` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`user` (
   `userId` INT NOT NULL AUTO_INCREMENT ,
@@ -48,16 +46,17 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`bill`
 -- -----------------------------------------------------
-
+DROP TABLE IF EXISTS `moneybag`.`bill` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`bill` (
-  `roundId` INT NOT NULL AUTO_INCREMENT ,
+  `bill_id` INT NOT NULL AUTO_INCREMENT ,
   `moneybagId` INT NOT NULL ,
-  `roundName` VARCHAR(45) NOT NULL ,
+  `billName` VARCHAR(45) NOT NULL ,
   `createdDate` TIMESTAMP NOT NULL ,
   `info` TEXT NULL ,
   `fileName` VARCHAR(20) NULL ,
-  PRIMARY KEY (`roundId`, `moneybagId`) ,
+  `usedMoney` INT NULL ,
+  PRIMARY KEY (`bill_id`, `moneybagId`) ,
   INDEX `fk_round_moneybag1_idx` (`moneybagId` ASC) ,
   CONSTRAINT `fk_round_moneybag1`
     FOREIGN KEY (`moneybagId` )
@@ -70,7 +69,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`user_moneybag_mapping`
 -- -----------------------------------------------------
-
+DROP TABLE IF EXISTS `moneybag`.`user_moneybag_mapping` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`user_moneybag_mapping` (
   `moneybagId` INT NOT NULL ,
@@ -94,7 +93,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`payment`
 -- -----------------------------------------------------
-
+DROP TABLE IF EXISTS `moneybag`.`payment` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`payment` (
   `payId` INT NOT NULL ,
@@ -113,7 +112,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`payment_has_user`
 -- -----------------------------------------------------
-
+DROP TABLE IF EXISTS `moneybag`.`payment_has_user` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`payment_has_user` (
   `payment_payId` INT NOT NULL ,
