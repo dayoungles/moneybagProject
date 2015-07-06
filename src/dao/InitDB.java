@@ -20,7 +20,7 @@ public class InitDB {
 	public void initialize() {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 
-		populator.addScript(new ClassPathResource("moneybag_0622.sql"));
+		populator.addScript(new ClassPathResource("moneybag0704.sql"));
 		
 		//샘플 코드 
 		//populator.addScript(new ClassPathResource("sample.sql"));

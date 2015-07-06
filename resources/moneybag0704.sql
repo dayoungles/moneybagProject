@@ -8,7 +8,6 @@ USE `moneybag` ;
 -- -----------------------------------------------------
 -- Table `moneybag`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `moneybag`.`user` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`user` (
   `userId` INT NOT NULL AUTO_INCREMENT ,
@@ -24,7 +23,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`moneybag`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `moneybag`.`moneybag` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`moneybag` (
   `moneybagId` INT NOT NULL AUTO_INCREMENT ,
@@ -46,7 +44,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`bill`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `moneybag`.`bill` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`bill` (
   `bill_id` INT NOT NULL AUTO_INCREMENT ,
@@ -69,7 +66,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`user_moneybag_mapping`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `moneybag`.`user_moneybag_mapping` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`user_moneybag_mapping` (
   `moneybagId` INT NOT NULL ,
@@ -93,7 +89,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`payment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `moneybag`.`payment` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`payment` (
   `payId` INT NOT NULL ,
@@ -112,7 +107,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `moneybag`.`payment_has_user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `moneybag`.`payment_has_user` ;
 
 CREATE  TABLE IF NOT EXISTS `moneybag`.`payment_has_user` (
   `payment_payId` INT NOT NULL ,
