@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+div.bagArea {
+	width: 800px;
+	background: #e4e4e4;
+	margin: 10px;
+}
+
+a.register{
+	margin:10px;
+	
+}
+
+div.billArea{
+	display: block;
+}
+div.bill{
+	width: 150px;
+	height:150px;
+	background:#FFF;
+	border-radius:10px;
+	padding: 10px;
+	margin: 20px;
+	display:inline-block;
+	
+}

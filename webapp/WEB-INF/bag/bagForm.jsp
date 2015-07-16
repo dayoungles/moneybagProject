@@ -11,7 +11,7 @@
 	<form method="post" action="/createBag" enctype="multipart/form-data">
 		info:<input name="info" /><br />
 		 member:  <input	name ="user1" /><br />
-		 대표 이미지 upload: <input type="file" name="file"/><br/>
+		 대표 이미지 upload: 대표 이미지: <input type="file" name="file"/>
 		 <div class="prevImg">
 			 
 		 </div>

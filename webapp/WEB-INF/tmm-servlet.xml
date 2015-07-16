@@ -13,6 +13,8 @@
 	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
 	<mvc:resources location="/img/" mapping="/img/**"></mvc:resources>
 	<mvc:resources location="/userImg/" mapping="/userImg/**"></mvc:resources> 
+	<mvc:resources location="/bagImg/" mapping="/bagImg/**"></mvc:resources> 
+	<mvc:resources location="/bill_img/" mapping="/bill_img/**"></mvc:resources> 
 	
 	<context:component-scan base-package="controller"/>
 	<context:component-scan base-package="dao"/>
