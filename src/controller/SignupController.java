@@ -58,7 +58,7 @@ public class SignupController {
 		}
 		String realPath = request.getSession().getServletContext()
 				.getRealPath("/");
-		realPath += "../userImg/";
+		realPath += "/userImg/";
 		
 		FileUpload upload = uploadService.fileSetting(file, realPath);
 		

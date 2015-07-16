@@ -34,7 +34,7 @@ public class BagDao {
 															// 가지고 올지?
 			bag.setId(rs.getInt("moneybagId"));
 			bag.setInfo(rs.getString("info"));
-			bag.setPicture(rs.getString("fileName"));
+			bag.setFileName(rs.getString("fileName"));
 			return bag;
 		};
 
@@ -87,7 +87,7 @@ public class BagDao {
 		try {
 			Bag bag = jdbcTemplate.queryForObject(sql, new Object[] { bagId },
 					bagMapper);
-			logger.debug("bag:{}", bag);
+			
 			return bag;
 			// return jdbcTemplate.queryForObject(sql, new
 			// BeanPropertyRowMapper<Bag>(Bag.class), bagId);

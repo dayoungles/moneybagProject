@@ -7,7 +7,7 @@ public class Bag {
 	String createdDate;
 	String account;
 	String info;
-	String picture;// 사진 정보를 뭘로 처리해야할지 모르겠음.
+	String fileName;
 
 	Bag(int adminId, String account) {
 		this.adminId = adminId;
@@ -24,7 +24,7 @@ public class Bag {
 		this.adminId = adminId;
 		this.account = account;
 		this.info = info;
-		this.picture = picture;
+		this.fileName = picture;
 	}
 
 	public Bag() {
@@ -71,19 +71,19 @@ public class Bag {
 		this.info = info;
 	}
 
-	public String getPicture() {
-		return picture;
+	public String getfileName() {
+		return fileName;
 	}
 
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setFileName(String picture) {
+		this.fileName = picture;
 	}
 
 	@Override
 	public String toString() {
 		return "Bag [id=" + id + ", adminId=" + adminId + ", createdDate="
 				+ createdDate + ", account=" + account + ", info=" + info
-				+ ", picture=" + picture + "]";
+				+ ", fileName=" + fileName + "]";
 	}
 
 }
