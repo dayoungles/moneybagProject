@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +41,7 @@ public class SignupController {
 	
 	@RequestMapping("/form")
 	public String signupForm(Model model) {
-		
+		model.addAttribute("user", new User());
 		return "/user/signup";
 	}
 
@@ -59,7 +60,9 @@ public class SignupController {
 			for (ObjectError error : list) {
 				logger.debug("error:{}", error.getDefaultMessage());
 			}
-			return "형식 갖춰라 ";
+
+			return "user/signup";
+
 		}
 		if(userService.isExistUser(user.getEmail())){
 			return "이미 가입된 이메일입니다.";//물론 이렇게 하면 에러가 납니다 ^_^  requestBody를 이용해서 js로 처리하는 방법을 봐야 합니다. 
@@ -85,6 +88,7 @@ public class SignupController {
 	
 	@RequestMapping("/testValid")
 	public String testValidation(@Valid User user, BindingResult result){
+
 		if(result.hasErrors()){
 			logger.info("valid 어라");
 			List<ObjectError> errors = result.getAllErrors();
