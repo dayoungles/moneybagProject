@@ -1,5 +1,6 @@
 package model;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -10,16 +11,23 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class User {
 	
-	@Email @NotEmpty 
+	@Email @NotNull
 	private String email;
+	
 	@Size(min=8, max=20)
 	private String password;
-	@Size(min=20) @NotEmpty
+	
+	@Size(min=4) @NotNull
 	private String name;
+	
+	@NotNull
 	private int id;
-	@NotEmpty @Pattern(regexp="[0-9]")
+	
+	@NotNull @Pattern(regexp="[0-9]")
 	private String account;
+	
 	private String fileName;
+	
 	public User() {
 
 	}
