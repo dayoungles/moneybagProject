@@ -3,8 +3,8 @@
 <properties>
 	<comment>application-properties</comment>
 	<entry key="database.driverClassName">com.mysql.jdbc.Driver</entry>
-	<entry key="database.url">jdbc:mysql://128.199.238.60:3306/moneybag</entry>
+ 	<entry key="database.url">jdbc:mysql://128.199.238.60:3306/moneybag</entry>
+<!-- 	<entry key="database.url">jdbc:mysql://localhost/moneybag</entry> -->
 	<entry key="database.username">moneybag</entry>
 	<entry key="database.password">money123!@#</entry>
-
 </properties>

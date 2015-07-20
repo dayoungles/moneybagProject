@@ -6,16 +6,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/css/user/home.css">
+
+
+
 <title>Insert title here</title>
 </head>
 <body>
 	<header> 
-	<div class="menu" id="menu1">메뉴1</div>
+	<div class="menu" id="menu1"><a href="/index">home</a></div>
 	<div class="menu" id="menu2">메뉴 2</div>
-	<div class="menu" id="userImg">
-		<img src="userImg/${user.fileName}" width="30px" height="30px"/>
-	</div>
+	<%-- <img class="menu" id="userImg" src="/userImg/${user.fileName}" width="50" height="50"> --%> 
 	<div class="menu" id="userInfo">${user.name} 님 </div>
 	<div class="menu" id="logout"><a href="/user/logout"><button>logout</button></a></div>
 	</header>

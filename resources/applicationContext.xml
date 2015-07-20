@@ -17,7 +17,4 @@
 		p:dataSource-ref="dataSource" />
 
 
-<!-- 	<bean id="jacksonMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
- -->
 </beans>

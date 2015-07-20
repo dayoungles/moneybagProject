@@ -5,6 +5,8 @@
 .project
 /webapp/WEB-INF/classes
 /tomcat.8080
-/userImg
+/webapp/userImg
 /webapp/WEB-INF/.gitignore
 .classpath
+webapp/bagImg/
+webapp/bill_img

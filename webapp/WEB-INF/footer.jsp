@@ -3,8 +3,9 @@
 
 	<sidebar>
 		<div class="moneybagForm">
-			<a href="/moneybagForm"><button>머니백 생성</button></a>
+			<a href="/moneybagForm">머니백 생성</a>
 		</div>
+		
 	</sidebar>
 
 </body>
