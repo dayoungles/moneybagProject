@@ -118,9 +118,4 @@ public class BagController {
 		return "/bag/showBagInfo";
 	}
 	
-	@RequestMapping("/moneybagPayCheck")
-	public String moneybagPayCheck() {
-		return "/bag/payCheck";
-	}
-
 }

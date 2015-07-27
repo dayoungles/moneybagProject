@@ -20,11 +20,7 @@ public class User {
 	@Size(min=4) @NotNull
 	private String name;
 	
-<<<<<<< HEAD
-	@NotNull(message="notnull") 
-=======
 	@NotNull
->>>>>>> newDayoungle
 	private int id;
 	
 	@NotNull @Pattern(regexp="[0-9]")
