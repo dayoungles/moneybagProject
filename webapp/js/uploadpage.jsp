@@ -27,6 +27,6 @@
 		<button type ="submit">ì ì¶</button>
 	</form>
 	<button id="ajaxButton">ajax</button>
-	<script src="../js/testAjax.js"/>
+	<script src="../js/testAjax.js"></script>
 </body>
 </html>

@@ -9,16 +9,13 @@
 </head>
 <body>
 	<form method="post" action="/createBag" enctype="multipart/form-data">
-		info:<input name="info" /><br />
-		 member:  <input	name ="user1" /><br />
-		 대표 이미지 upload: 대표 이미지: <input type="file" name="file"/>
-		 <div class="prevImg">
-			 
-		 </div>
-		<button type ="submit">제출</button>
+		info:<input name="info" /><br /> 
+		member: <input name="user1" /><br />
+		대표 이미지 upload: 대표 이미지: <input type="file" name="file" />
+		<div class="prevImg"></div>
+		<button type="submit">제출</button>
 	</form>
 </body>
-<script>
-	
-</script>
+<script src="testAjax.js"></script>
+<script src="addUser.js"></script>
 </html>
