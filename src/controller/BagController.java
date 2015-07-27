@@ -117,5 +117,5 @@ public class BagController {
 		model.addAttribute("bag", bag);
 		return "/bag/showBagInfo";
 	}
-
+	
 }
