@@ -10,19 +10,19 @@ import org.hibernate.validator.constraints.Email;
 
 public class User {
 	
-	@Email @NotNull
+	@Email 
 	private String email;
 	
 	@Size(min=8, max=20)
 	private String password;
 	
-	@Size(min=4) @NotNull
+	@Size(min=4) 
 	private String name;
 	
-	@NotNull
+	
 	private int id;
 	
-	@NotNull @Pattern(regexp="[0-9]")
+	@Pattern(regexp="[0-9]")
 	private String account;
 	
 	private String fileName;
