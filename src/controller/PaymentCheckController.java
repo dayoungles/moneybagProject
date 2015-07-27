@@ -14,7 +14,12 @@ public class PaymentCheckController {
 	
 	@RequestMapping("/moneybagPayCheck/{bagId}")
 	public String moneybagPayCheck(Model model, @PathVariable("bagId") String bagId) {
-		
+/*
+ * 필요한 내용
+ * 1. moneyBag title
+ * 2. 지불정보(날짜, 사용자명단, 각각의 payment상태값[불참, 납부, 미납])
+ * 
+ * */
 		return "/bag/payCheck";
 	}
 
