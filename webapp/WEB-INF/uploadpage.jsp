@@ -10,7 +10,7 @@
 </head>
 <body>
 	<button id="ajaxButton">ajax</button>
-	<script src="/js/testAjax.js" type='text/javascript'/> </script>
+	<script src="/js/testAjax.js" type='text/javascript'></script>
 
 </body>
 
