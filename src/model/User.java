@@ -5,7 +5,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 
 
@@ -20,11 +19,7 @@ public class User {
 	@Size(min=4) @NotNull
 	private String name;
 	
-<<<<<<< HEAD
-	@NotNull(message="notnull") 
-=======
 	@NotNull
->>>>>>> newDayoungle
 	private int id;
 	
 	@NotNull @Pattern(regexp="[0-9]")

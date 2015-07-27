@@ -1,6 +1,7 @@
 package controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import model.User;
 
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,9 +32,13 @@ public class UserController {
 	}
 
 	@RequestMapping("/loginCheck")
-	public String checkLogin(@ModelAttribute("user") User user, Model model,
-			HttpSession session) {
+	public String checkLogin(@Valid @ModelAttribute("user") User user, Model model,
+			HttpSession session, BindingResult result) {
 		// 로그인 가능한지 확인하는 함수 사용
+		if(result.hasErrors()){
+			logger.info("validation problem");
+			return "redirect:/user/login";
+		}
 		logger.debug("user:{}", user);
 		if (userService.checkLoginValidation(user) != null) {
 			User foundUser = userService.selectUserByEmail(user.getEmail());
