@@ -1,27 +1,13 @@
 /**
- * sample : var test = new ajax("GET", "/url/test", callbackfunction ); - post일
- * 경우 test.setMethod(만들어놓은 컨텐츠 );// 이 컨텐츠는 key=value&key1=value1;이런식으로 스크립트에서 직접
- * 만들어서 보내야되는 녀석임. post로 보낼 예정 test.service();
+ * 
  */
 
 var ajax = function(method, url, callback) {
 	this.httpRequest;
-	this.contents;// send(param)
 	this.method = method;
 	this.url = url;
 	this.callback = callback;
-	// this.service();
-};
-
-/**
- * 메소드가 포스트일 경우 url형식으로 만들어 보내기 위해서 POST인 경우에 대해서만 만들었음. 내가 PUT을 쓸 것 같지 않음;
- */
-ajax.prototype.setMethod = function(content) {
-	if (this.method === "POST") {
-		this.httpRequest.setRequestHeader('Content-Type',
-				'application/x-www-form-urlencoded');// MIME type...
-	}
-	this.content = content;
+	this.service();
 };
 
 ajax.prototype.setHTTP = function() {
@@ -47,7 +33,7 @@ ajax.prototype.setHTTP = function() {
 
 };
 
-ajax.prototype.getResponse = function() {
+ajax.prototype.getResponse  = function(){
 	if (this.httpRequest.readyState === 4) {
 		if (this.httpRequest.status === 200) {
 			this.callback(this.httpRequest.responseText);
@@ -57,10 +43,17 @@ ajax.prototype.getResponse = function() {
 	}
 };
 
-ajax.prototype.service = function(param) {
+ajax.prototype.service = function() {
 	this.setHTTP();
 	this.httpRequest.onreadystatechange = this.getResponse.bind(this);
-	this.httpRequest.open(this.method, this.url, true);
-	this.setMethod(param);
-	this.httpRequest.send(this.contents);
+	this.httpRequest.open(this.method, this.url);
+	this.httpRequest.send();
 };
+
+// var test = new ajax("GET", "/api/test", function test(){
+// console.log(this.httpRequest.responseText);
+// });
+//
+//
+// test.service();
+
