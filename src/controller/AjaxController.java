@@ -37,7 +37,6 @@ public class AjaxController {
 	@RequestMapping(value="/addMember")
 //	@RequestMapping(value="/addMember", method=RequestMethod.POST)
 	public @ResponseBody String testAddmember(@RequestParam("name") String name) {
-		logger.debug("name:{}" ,name);
 		return String.valueOf(userService.isExistUserName(name));
 		
 	}

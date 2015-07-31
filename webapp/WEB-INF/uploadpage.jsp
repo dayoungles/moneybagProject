@@ -52,6 +52,8 @@
 						var cloned= member.querySelector(".member").cloneNode(true);
 						cloned.innerHTML = this.value+" ";
 						member.insertAdjacentElement("beforeend", cloned);
+					} else {
+						alert("존재하지 않는 사용자 입니다 메일보내서 가입하라고 해봐 임마");
 					}
 				}).bind(this));
 				oAjax.service();
