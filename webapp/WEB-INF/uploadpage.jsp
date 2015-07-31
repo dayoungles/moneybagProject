@@ -16,6 +16,7 @@
 
 </head>
 <body>
+	test page 
 	<form method="post" action="/createBag" enctype="multipart/form-data">
 		info:<input name="info" /><br />
 		 member:  <input	name ="user1" /><br />
@@ -26,18 +27,32 @@
 		 </div>
 		<button type ="submit">ì ì¶</button>
 	</form>
-	<button id="ajaxButton">ajax</button>
+	<button id="ajaxButton">ajax test</button>
+	<input type="text" name="addMember" url="/api/addMember" />
+	
 	<script src="../js/ajax.js"></script>
 	<script>
 	  document.getElementById("ajaxButton").addEventListener("click", function() { 
 	
-			var test = new ajax("GET", "/api/test", function(response){
+			var test = new ajax("POST", "/api/test", function(response){
 				alert(response);
-				
 			});
-		
-
+			test.service();
 	 });
+	  
+	 var _input =document.querySelector("input[name='addMember']"); 
+	 _input.addEventListener("keydown", function(e){
+			var key = e.which || e.keyCode;
+			if(key===13) {
+ 				var oAjax = new ajax("GET", "/api/addMember?name="+this.value, function(response){
+					alert(response);
+				});
+				oAjax.service();
+				
+			}
+	 }); 
+		 
+	 
 	</script>
 </body>
 </html>
