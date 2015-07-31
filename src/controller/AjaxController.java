@@ -37,9 +37,9 @@ public class AjaxController {
 		return "test succeddddddd";
 	}
 	
-	@RequestMapping(value="/addMember")
-//	@RequestMapping(value="/addMember", method=RequestMethod.POST)
-	public @ResponseBody String testAddmember(@RequestParam("name") String name) {
+//	@RequestMapping(value="/addMember")
+	@RequestMapping(value="/addMember", method=RequestMethod.POST, headers="Content-Type=application/x-www-form-urlencoded")
+	public @ResponseBody String testAddmember(@RequestBody String name) {
 		logger.debug(name);
 		return name;
 	}

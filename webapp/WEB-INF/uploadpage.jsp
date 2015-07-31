@@ -44,7 +44,7 @@
 	 _input.addEventListener("keydown", function(e){
 			var key = e.which || e.keyCode;
 			if(key===13) {
- 				var oAjax = new ajax("GET", "/api/addMember?name="+this.value, function(response){
+ 				var oAjax = new ajax("POST", "/api/addMember?name="+this.value, function(response){
 					alert(response);
 				});
 				oAjax.service();
