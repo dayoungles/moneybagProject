@@ -29,7 +29,9 @@
 	</form>
 	<button id="ajaxButton">ajax test</button>
 	<input type="text" name="addMember" url="/api/addMember" />
-	
+	<div class="members">
+		<span class="member"></span>
+	</div>
 	<script src="../js/ajax.js"></script>
 	<script>
 	  document.getElementById("ajaxButton").addEventListener("click", function() { 
@@ -44,9 +46,14 @@
 	 _input.addEventListener("keydown", function(e){
 			var key = e.which || e.keyCode;
 			if(key===13) {
- 				var oAjax = new ajax("GET", "/api/addMember?name="+this.value, function(response){
-					alert(response);
-				});
+ 				var oAjax = new ajax("GET", "/api/addMember?name="+this.value, (function(response){
+					if(response === "true"){
+						var member = document.querySelector(".members");
+						var cloned= member.querySelector(".member").cloneNode(true);
+						cloned.innerHTML = this.value+" ";
+						member.insertAdjacentElement("beforeend", cloned);
+					}
+				}).bind(this));
 				oAjax.service();
 				
 			}

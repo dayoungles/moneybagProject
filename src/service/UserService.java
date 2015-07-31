@@ -51,4 +51,11 @@ public class UserService {
 		}
 	}
 
+	public boolean isExistUserName(String name) {
+		User foundUser= userDao.getUserByName(name);
+		if(foundUser != null)
+			return true;
+		return false;
+	}
+
 }

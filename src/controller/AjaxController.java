@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.UploadService;
+import service.UserService;
 
 @Controller
 @RequestMapping("/api")
@@ -24,13 +25,9 @@ public class AjaxController {
 	@Autowired
 	UploadService uploadService;
 
-	// @RequestMapping("/fileUpload")
-	// public @ResponseBody String fileUploader(@RequestParam("uploadFile")
-	// MultipartFile file) throws IllegalStateException, IOException{
-	// // String fileName = uploadService.storeFileToDirectory(file);
-	//
-	// return fileName;
-	// }
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping(value="/test")
 	public @ResponseBody String testAjax() {
 
@@ -40,8 +37,8 @@ public class AjaxController {
 	@RequestMapping(value="/addMember")
 //	@RequestMapping(value="/addMember", method=RequestMethod.POST)
 	public @ResponseBody String testAddmember(@RequestParam("name") String name) {
-		logger.debug(name);
-		return name;
+//		return String.valueOf(userService.isExistUserName(name));
+		return "true";
 	}
 
 	@RequestMapping("/upload")

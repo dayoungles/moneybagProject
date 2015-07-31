@@ -62,4 +62,14 @@ public class UserDao {
 		// return null;
 	}
 
+	public User getUserByName(String name) {
+		String sql = "SELECT * FROM user WHERE name=?";
+		try {
+			return this.jdbctemplate.queryForObject(sql,
+					new Object[] { name }, this.userMapper);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
 }
