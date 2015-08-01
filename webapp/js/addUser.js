@@ -1,27 +1,22 @@
 /**
- * add User as a member of moneybag with ajax 
+ * add User as a member of moneybag with ajax
  */
 
-var _userName = document.getElementByid("member");
-_userName.addEventListener("keydown", ajax(e));
-
-function ajax(e){
-	var key = e.keyCode || e.which;
-	if(key === 13){
-		e.preventDefault();
-		var msg = this.value;
-		var response = ajaxModule(msg, "/api/addMemberToBag");
-		
-		if(response === "existUser OK"){
-			//유저 이름을 하단에 등록.
-			
-		}else{
-			//alert ("가입하지 않은 유저입니다 서비스로 초대하세요 ");
-			//alert ("가입 요청 메세지, 초대할 메일 주소 prompt입력 ");
-			//입력 받은 정보를 다시 api/sendInviteMSG해서 메일 전
-		} 
-	}
-	
-
-	
-}
+var el_input = document.getElementById("addMember");
+var btn = document.getElementById("addButton");
+btn.addEventListener("click", function(){
+	var name = el_input.value;
+	var oAjax = new ajax("GET", "/api/addMember?name=" + name,
+			(function(response) {
+				if (response === "true") {
+					var el_member = document.querySelector(".members");
+					var span_cloned = el_member.querySelector(".user")
+							.cloneNode(true);
+					span_cloned.innerHTML = name + " ";
+					el_member.insertAdjacentElement("beforeend", span_cloned);
+				} else {
+					alert("없는 사용자임..메일을 보내봅시다 ");
+				}
+			}).bind(this));
+	oAjax.service();
+});

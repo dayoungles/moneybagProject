@@ -65,7 +65,7 @@ public class BagController {
 	 */
 	@RequestMapping(value = "/createBag", method = RequestMethod.POST)
 	public String createBag(@RequestParam("info") String info,
-			@RequestParam("user1") String addUserEmail,
+			@RequestParam("user") String addUserEmail,
 			@RequestParam("file") MultipartFile file, HttpSession session,
 			HttpServletRequest request) {
 		User user = (User) session.getAttribute("user");

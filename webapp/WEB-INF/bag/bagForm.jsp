@@ -10,12 +10,16 @@
 <body>
 	<form method="post" action="/createBag" enctype="multipart/form-data">
 		info:<input name="info" /><br /> 
-		member: <input name="user1" /><br />
+		member: <input name="user" id="addMember"/>
+		<span id="addButton">추가 </span><br/>
+		<div class="members">
+			<span class="user"></span>
+		</div>
 		대표 이미지 upload: 대표 이미지: <input type="file" name="file" />
 		<div class="prevImg"></div>
 		<button type="submit">제출</button>
 	</form>
 </body>
-<script src="testAjax.js"></script>
-<script src="addUser.js"></script>
+<script src="/../js/ajax.js"></script>
+<script src="/../js/addUser.js"></script>
 </html>
