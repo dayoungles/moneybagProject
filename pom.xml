@@ -18,7 +18,7 @@
 			<id>productImagePath</id>
 			<properties>
 				<img.path>tempPath</img.path>
-				<!-- 실서버 상 폴더를 설정하면 된다.  -->
+				<!-- 실서버 상 폴더를 설정하면 된다. -->
 			</properties>
 		</profile>
 	</profiles>
@@ -193,6 +193,25 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
+
+		<!-- mail 전송을 위한 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.4</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-core</artifactId> 
+			<version>${org.springframework.version}</version> </dependency> <dependency> 
+			<groupId>org.springframework</groupId> <artifactId>spring-beans</artifactId> 
+			<version>${org.springframework.version}</version> </dependency> <dependency> 
+			<groupId>org.springframework</groupId> <artifactId>spring-context</artifactId> 
+			<version>${org.springframework.version}</version> </dependency> -->
+
 	</dependencies>
 	<build>
 		<finalName>moneybag</finalName>
