@@ -8,15 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="/createBag" enctype="multipart/form-data">
+	<form method="post" action="/createBag" enctype="multipart/form-data" onsubmit="return false;">
 		info:<input name="info" /><br /> 
-		member: <input name="user" id="addMember"/>
+		member 이메일만 입력 됨ㅋ: <input name="user" id="addMember"/>
 		<span id="addButton">추가 </span><br/>
 		<div class="members">
 			<span class="user"></span>
 		</div>
 		대표 이미지 upload: 대표 이미지: <input type="file" name="file" />
 		<div class="prevImg"></div>
+		<input type="hidden" name="userList" id="hidden"/>
 		<button type="submit">제출</button>
 	</form>
 </body>

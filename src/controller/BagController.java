@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,14 +66,13 @@ public class BagController {
 	 */
 	@RequestMapping(value = "/createBag", method = RequestMethod.POST)
 	public String createBag(@RequestParam("info") String info,
-			@RequestParam("user") String addUserEmail,
+			@RequestParam("userList") String userIdList,
 			@RequestParam("file") MultipartFile file, HttpSession session,
 			HttpServletRequest request) {
 		User user = (User) session.getAttribute("user");
 
 		// 계좌 여는 유저 정보, 만들려고 하는 머니백 이름
 		bagService.createBag(user, info);
-
 		Bag foundBag = bagService.findBagByUserIdandInfo(user.getId(), info);
 
 		if (uploadService.isImgFile(file) == false) {
@@ -83,18 +83,20 @@ public class BagController {
 				.getRealPath("/");
 		realPath += "/bagImg/";
 		FileUpload upload = uploadService.fileSetting(file, realPath);
-		// 사진 등록 로직 정리할 것 
+		// 사진 등록 로직 정리할 것
 		foundBag.setFileName(upload.getName());
 
 		// admin등록
 		enrollService.enrollUser(user.getId(), foundBag.getId());
 		// 멤버 등록
-		if (userService.isExistUser(addUserEmail)) {
-			User addUser = userService.selectUserByEmail(addUserEmail);
-			enrollService.enrollUser(addUser.getId(), foundBag.getId());
-		} else {
-			// 이런 부분 클라이언트에 어떻게 처리해주나? 바로 존재하는 회원인지 ajax로 확인해야 할 것 같은데.
-			logger.info("등록된 유저가 아닌뎁쇼 가입하라고 메일 보내야할 듯");
+		// userIdList를 파싱해서 배열로 만든다.
+		String[] userIds = userIdList.split(",");
+		// 각 배열에 대해서 enrolluser를 한번씩 해준다. 과부하라고 생각하지만 인원이 늘 유동적이기 때문에 방법이 없는 것
+		// 같다.
+		int length = userIds.length;
+		int bagId = foundBag.getId();
+		for (int i = 0; i < length; i++) {
+			enrollService.enrollUser(Integer.parseInt(userIds[i]), bagId);
 		}
 		return "redirect:/index";
 	}
@@ -117,5 +119,5 @@ public class BagController {
 		model.addAttribute("bag", bag);
 		return "/bag/showBagInfo";
 	}
-	
+
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.UserDao;
+import dao.UserMappingDao;
 import model.User;
 
 @Service
@@ -15,6 +16,9 @@ public class UserService {
 			.getLogger(UserService.class);
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	UserMappingDao userMappingDao;
 
 	public void insertUser(User user) {
 		// 이미 가입된 email인지 확인
@@ -51,11 +55,12 @@ public class UserService {
 		}
 	}
 
-	public boolean isExistUserName(String name) {
+	public boolean isExistUserByName(String name) {
 		User foundUser= userDao.getUserByName(name);
 		if(foundUser != null)
 			return true;
 		return false;
 	}
+
 
 }

@@ -4,15 +4,21 @@
 
 var el_input = document.getElementById("addMember");
 var btn = document.getElementById("addButton");
+var submitBtn = document.querySelector("button[type='submit']");
+console.log("버튼 찾았니?"+ submitBtn);
+
+//ajax통신으로 존재하는 유저인지 확인하는 함수 
 btn.addEventListener("click", function(){
-	var name = el_input.value;
-	var oAjax = new ajax("GET", "/api/addMember?name=" + name,
+	var email = el_input.value;
+	var oAjax = new ajax("GET", "/api/addMember?email=" + email,
 			(function(response) {
-				if (response === "true") {
+				if (response != null) {
 					var el_member = document.querySelector(".members");
 					var span_cloned = el_member.querySelector(".user")
 							.cloneNode(true);
-					span_cloned.innerHTML = name + " ";
+					var userInfo = JSON.parse(response);
+					span_cloned.innerHTML = userInfo.userName + " ";
+					span_cloned.setAttribute("value", userInfo.userId);
 					el_member.insertAdjacentElement("beforeend", span_cloned);
 				} else {
 					alert("없는 사용자임..메일을 보내봅시다 ");
@@ -20,3 +26,17 @@ btn.addEventListener("click", function(){
 			}).bind(this));
 	oAjax.service();
 });
+
+submitBtn.addEventListener("click", function(){
+	//span에 들어있는 멤버들 이름을 모두 찾아서 배열로 생성해서 서버로 전송
+	var userList = document.getElementsByClassName("user");
+	var nameList=[];
+	var userSize = userList.length;
+	for(var i=1; i< userSize; i++){//sample span제외하고 1부터 시작
+		nameList[i]= userList[i].getAttribute("value");
+	}
+	var hiddenVal = document.getElementById("hidden");
+	hiddenVal.value = nameList;
+	
+});
+
