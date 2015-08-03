@@ -9,18 +9,18 @@ public class Bag {
 	String info;
 	String fileName;
 
-	Bag(int adminId, String account) {
+	public Bag(int adminId, String account) {
 		this.adminId = adminId;
 		this.account = account;
 	}
 
-	Bag(int adminId, String account, String info) {
+	public Bag(int adminId, String account, String info) {
 		this.adminId = adminId;
 		this.account = account;
 		this.info = info;
 	}
 
-	Bag(int adminId, String account, String info, String picture) {
+	public Bag(int adminId, String account, String info, String picture) {
 		this.adminId = adminId;
 		this.account = account;
 		this.info = info;

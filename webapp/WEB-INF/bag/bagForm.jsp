@@ -8,9 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="/createBag" enctype="multipart/form-data" onsubmit="return false;">
-		info:<input name="info" /><br /> 
-		member 이메일만 입력 됨ㅋ: <input name="user" id="addMember"/>
+	<form method="post" action="/createBag" enctype="multipart/form-data">
+		info:
+		<input type="text" name="info" /><br /> 
+		member 이메일만 입력 됨ㅋ:
+		 <input type="text" name="user" id="addMember"/>
 		<span id="addButton">추가 </span><br/>
 		<div class="members">
 			<span class="user"></span>

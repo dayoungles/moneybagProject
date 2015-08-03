@@ -67,13 +67,15 @@ public class BagController {
 	@RequestMapping(value = "/createBag", method = RequestMethod.POST)
 	public String createBag(@RequestParam("info") String info,
 			@RequestParam("userList") String userIdList,
-			@RequestParam("file") MultipartFile file, HttpSession session,
+			@RequestParam("file") MultipartFile file, 
+			HttpSession session,
 			HttpServletRequest request) {
 		User user = (User) session.getAttribute("user");
 
+		Bag bag = new Bag(user.getId(), user.getAccount(), info);
 		// 계좌 여는 유저 정보, 만들려고 하는 머니백 이름
-		bagService.createBag(user, info);
-		Bag foundBag = bagService.findBagByUserIdandInfo(user.getId(), info);
+		int bagId = bagService.createBag(bag);
+		Bag foundBag = bagService.findBagByBagId(bagId);
 
 		if (uploadService.isImgFile(file) == false) {
 			return "이미지 파일만 입력 가능합니다";
@@ -94,7 +96,7 @@ public class BagController {
 		// 각 배열에 대해서 enrolluser를 한번씩 해준다. 과부하라고 생각하지만 인원이 늘 유동적이기 때문에 방법이 없는 것
 		// 같다.
 		int length = userIds.length;
-		int bagId = foundBag.getId();
+		
 		for (int i = 0; i < length; i++) {
 			enrollService.enrollUser(Integer.parseInt(userIds[i]), bagId);
 		}
