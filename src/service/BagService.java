@@ -22,4 +22,8 @@ public class BagService {
 		return bagDao.findBagByBagId(bagId);
 	}
 
+	public void setImgFileName(String fileName, int bagId) {
+		bagDao.insertPhoto(fileName, bagId);
+	}
+
 }

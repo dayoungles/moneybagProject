@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -100,6 +99,11 @@ public class BagDao {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+
+	public void insertPhoto(String fileName, int moneybagId) {
+		String sql ="update moneybag set fileName=? where moneybagId=?";
+		jdbcTemplate.update(sql, new Object[]{fileName, moneybagId});
 	}
 
 	

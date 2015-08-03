@@ -86,7 +86,7 @@ public class BagController {
 		realPath += "/bagImg/";
 		FileUpload upload = uploadService.fileSetting(file, realPath);
 		// 사진 등록 로직 정리할 것
-		foundBag.setFileName(upload.getName());
+		bagService.setImgFileName(upload.getName(), bagId);
 
 		// admin등록
 		enrollService.enrollUser(user.getId(), foundBag.getId());
