@@ -14,12 +14,6 @@ public class Bag {
 		this.account = account;
 	}
 
-	public Bag(int adminId, String account, String info) {
-		this.adminId = adminId;
-		this.account = account;
-		this.info = info;
-	}
-
 	public Bag(int adminId, String account, String info, String picture) {
 		this.adminId = adminId;
 		this.account = account;

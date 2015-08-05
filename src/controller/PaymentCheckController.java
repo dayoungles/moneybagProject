@@ -20,6 +20,7 @@ public class PaymentCheckController {
  * 2. 지불정보(날짜, 사용자명단, 각각의 payment상태값[불참, 납부, 미납])
  * 
  * */
+		model.addAttribute("bagId", bagId);//다른 작업하는데 쓰려고 일단 내가 붙여둠-다영글;
 		return "/bag/payCheck";
 	}
 

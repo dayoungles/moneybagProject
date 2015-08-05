@@ -14,16 +14,12 @@ public class BagService {
 	@Autowired
 	BagDao bagDao;
 
-	public int createBag(Bag bag) {
+	public Bag createBag(Bag bag) {
 		return  bagDao.insertBag(bag);
 	}
 
 	public Bag findBagByBagId(int bagId) {
 		return bagDao.findBagByBagId(bagId);
-	}
-
-	public void setImgFileName(String fileName, int bagId) {
-		bagDao.insertPhoto(fileName, bagId);
 	}
 
 }

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/header.jsp"%>
-
-<p> MONEYBAG recover 2-3(data를 넣어야 함)</p>
+<container>
+<p>MONEYBAG recover 2-3(data를 넣어야 함)</p>
 <table>
 	<tbody>
 		<tr>
@@ -37,5 +37,5 @@
 		</tr>
 	</tbody>
 </table>
-
-<%@ include file="/WEB-INF/footer.jsp"%>
+</container>
+<%@ include file="/WEB-INF/bag/showbagInfoMenu.jsp"%>

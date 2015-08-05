@@ -77,7 +77,7 @@ public class SignupController {
 				.getRealPath("/");
 		realPath += "/userImg/";
 
-		FileUpload upload = uploadService.fileSetting(file, realPath);
+		FileUpload upload = uploadService.uploadFile(file, realPath);
 
 		user.setFileName(upload.getName());
 		userService.insertUser(user);

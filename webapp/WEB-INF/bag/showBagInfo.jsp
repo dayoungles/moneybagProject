@@ -7,8 +7,8 @@
 <div class="bagArea">
 	<div class="info">머니백 정보: ${bag.info}</div>
 	
-	<a href="/bill/form/${bag.id}" class="register">새로운 사용내역 등록하기</a>
-	<a href="/moneybagPayCheck/${bag.id}" class="register">지불체크</a>
+	
+	
 	
 	<div class="billArea" >
 		<c:forEach var="bill" items="${billList}">
@@ -25,4 +25,4 @@
 </div>
 </container>
 
-<%@ include file="/WEB-INF/footer.jsp"%>
+<%@ include file="/WEB-INF/bag/showbagInfoMenu.jsp"%>

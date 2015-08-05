@@ -2,13 +2,14 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -70,6 +71,11 @@ public class UserDao {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+
+	public List getBagMembers(int bagId) {
+		String sql = "select u.userId, email, name, account, fileName from user_moneybag_mapping m join user u on u.userId = m.userId where moneybagId =?";
+		return this.jdbctemplate.queryForList(sql, new Object[]{bagId});
 	}
 
 }

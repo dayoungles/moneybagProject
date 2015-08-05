@@ -1,7 +1,8 @@
 /**
  * sample : var test = new ajax("GET", "/url/test", callbackfunction ); - post일
  * 경우 test.setMethod(만들어놓은 컨텐츠 );// 이 컨텐츠는 key=value&key1=value1;이런식으로 스크립트에서 직접
- * 만들어서 보내야되는 녀석임. post로 보낼 예정 test.service();
+ * 만들어서 보내야되는 녀석임. post로 보낼 예정 
+ * test.service();로 실행 
  */
 
 var ajax = function(method, url, callback) {

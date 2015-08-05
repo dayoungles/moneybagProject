@@ -65,25 +65,15 @@ public class BagDao {
 
 	}
 
-	public int insertBag(Bag bag) {
+	public Bag insertBag(Bag bag) {
 		String sql = "insert into moneybag (admin, account, info) values(?,?,?)";
 		jdbcTemplate.update(sql, bag.getAdminId(), bag.getAccount(), bag.getInfo());
 		return findLastCreatedBagByUserId(bag.getAdminId());
 	}
 	
-	public int findLastCreatedBagByUserId(int adminId){
+	public Bag findLastCreatedBagByUserId(int adminId){
 		String sql = "SELECT moneybagId from moneybag where admin=? order by moneybagId desc limit 1"; 
-		return jdbcTemplate.queryForObject(sql,new Object[]{adminId} , Integer.class);
-	}
-
-	public Bag findBagByUserIdAndBagInfo(int adminId, String bagInfo) {
-		String sql = "select * from moneybag where admin=? and info=?";
-		try {
-			return jdbcTemplate.queryForObject(sql, new Object[] { adminId,
-					bagInfo }, bagMapper);
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
+		return jdbcTemplate.queryForObject(sql,new Object[]{adminId} , bagMapper);
 	}
 
 	public Bag findBagByBagId(int bagId) {

@@ -1,4 +1,5 @@
 package email;
+import model.Email;
 import model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,23 @@ public class EmailSendService {
 	@Autowired
 	private MailSender mailSender;
 	
-	public void sendJoinEmail(User user, String email){
+	public void sendJoinEmail(User user, String email, String customMsg){
+		if(isValidEmail(email)==false){
+			return;//exception 발생 
+		}
+		Email mail = new Email(user, email);
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(email);
-		msg.setFrom("make.work1234@gmail.com");
-		msg.setSubject(user.getName()+" wants you");
-		msg.setText("body message join this service for our group!");
+		msg.setFrom(mail.getFrom()); 
+		msg.setSubject(mail.getSubject());
+		msg.setText(mail.getBodyText()+". "+customMsg);
 		
 		this.mailSender.send(msg);
 	}
+	
+	private boolean isValidEmail(String email){
+	
+		return true;
+	}
+	
 }

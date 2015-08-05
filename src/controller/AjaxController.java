@@ -1,5 +1,7 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import model.User;
 
 import org.slf4j.Logger;
@@ -19,43 +21,42 @@ import service.UserService;
 @Controller
 @RequestMapping("/api")
 public class AjaxController {
-	
-
 	private static final Logger logger = LoggerFactory.getLogger(AjaxController.class);
-	
-	@Autowired
+
+	@Autowired 
 	UploadService uploadService;
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	EmailSendService emailSender;
-	
+
 	@Autowired
 	BagService bagService;
-	
-	@RequestMapping(value="/test")
+
+	@RequestMapping(value = "/test")
 	public @ResponseBody String testAjax() {
 
 		return "test succeddddddd";
 	}
-	
+
 	/**
-	 * 이미 가입된 유저인지 확인하는 함수. boolean값을 String으로 반환한다. 
+	 * 이미 가입된 유저인지 확인하는 함수. boolean값을 String으로 반환한다.
+	 * 
 	 * @param name
 	 * @return boolean value in String
 	 */
-	@RequestMapping(value="/addMember")
-//	@RequestMapping(value="/addMember", method=RequestMethod.POST)
+	@RequestMapping(value = "/addMember")
+	// @RequestMapping(value="/addMember", method=RequestMethod.POST)
 	public @ResponseBody String testAddmember(@RequestParam("email") String email) {
 		User user = null;
-		if(userService.isExistUser(email)){
+		if (userService.isExistUser(email)) {
 			user = userService.selectUserByEmail(email);
-			logger.debug("{\"userId\":"+user.getId()+ ", \"userName+\":" + user.getName()+ "}");
-			return "{\"userId\":\""+user.getId()+ "\", \"userName\":\"" + user.getName()+ "\"}";
-		}else {
-			return null;
+			logger.debug("{\"userId\":" + user.getId() + ", \"userName+\":" + user.getName() + "}");
+			return "{\"userId\":\"" + user.getId() + "\", \"userName\":\"" + user.getName() + "\"}";
+		} else {
+			return "false";
 		}
 	}
 
@@ -65,9 +66,9 @@ public class AjaxController {
 	}
 
 	@RequestMapping("/sendEmail")
-	public @ResponseBody String sendEmail(@RequestParam("email") String email){
-		logger.debug("email:{}", email);
-		emailSender.sendJoinEmail(new User(), email);
+	public @ResponseBody String sendEmail(@RequestParam("email") String email, @RequestParam String msg, HttpSession session) {
+		logger.debug("email:{}, user:{}", email, (User)session.getAttribute("user"));
+		emailSender.sendJoinEmail((User)session.getAttribute("user"), email, msg);
 		return "success";
 	}
 }

@@ -15,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import service.UserService;
 
@@ -63,5 +65,12 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/user/login";
 	}
-
+	
+	@RequestMapping("/showMembers/{bagId}")
+	public String showMembers(@PathVariable ("bagId") int bagId, Model model){
+		List members =userService.getMembersInBag(bagId);
+		model.addAttribute("memberList", members);
+		logger.debug("members:{}", members);
+		return "/bag/showMembers";
+	}
 }

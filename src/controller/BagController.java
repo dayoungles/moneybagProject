@@ -1,12 +1,12 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.Bag;
+import model.BagMember;
 import model.Bill;
 import model.FileUpload;
 import model.User;
@@ -14,10 +14,8 @@ import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,11 +55,10 @@ public class BagController {
 	/**
 	 * 머니백 생성할 때 쓰는 함수. createForm에서 온다.
 	 * 
-	 * @param info
-	 *            머니백 이름
-	 * @param addUserEmail
-	 *            추가하려고 하는 유저 이메일을 받기로 했음. 그런데 이거 추가하는 방법도 유동적으로 바꿀 예정.
+	 * @param info: 머니백 이름  
+	 * @param userIdList: 추가하려고 하는 유저들의 userId (형식: "1, 23,123") 
 	 * @param session
+	 * @param 
 	 * @return
 	 */
 	@RequestMapping(value = "/createBag", method = RequestMethod.POST)
@@ -70,36 +67,19 @@ public class BagController {
 			@RequestParam("file") MultipartFile file, 
 			HttpSession session,
 			HttpServletRequest request) {
+		//user session get
 		User user = (User) session.getAttribute("user");
-
-		Bag bag = new Bag(user.getId(), user.getAccount(), info);
-		// 계좌 여는 유저 정보, 만들려고 하는 머니백 이름
-		int bagId = bagService.createBag(bag);
-		Bag foundBag = bagService.findBagByBagId(bagId);
-
-		if (uploadService.isImgFile(file) == false) {
-			return "이미지 파일만 입력 가능합니다";
-		}
-
-		String realPath = request.getSession().getServletContext()
-				.getRealPath("/");
-		realPath += "/bagImg/";
-		FileUpload upload = uploadService.fileSetting(file, realPath);
-		// 사진 등록 로직 정리할 것
-		bagService.setImgFileName(upload.getName(), bagId);
-
-		// admin등록
-		enrollService.enrollUser(user.getId(), foundBag.getId());
-		// 멤버 등록
-		// userIdList를 파싱해서 배열로 만든다.
-		String[] userIds = userIdList.split(",");
-		// 각 배열에 대해서 enrolluser를 한번씩 해준다. 과부하라고 생각하지만 인원이 늘 유동적이기 때문에 방법이 없는 것
-		// 같다.
-		int length = userIds.length;
+		//file upload
+		FileUpload upload = uploadService.uploadFile(file, "bagImg");
+		//make bag
+		Bag bag = new Bag(user.getId(), user.getAccount(), info, upload.getName());
+		Bag foundBag = bagService.createBag(bag);
+		// enroll members
+		userIdList += ","+user.getId();// 프론트에서 받아온 멤버리스트에 생성하는 유저의 id를 추가 
+		BagMember members = new BagMember();
+		members.setUserIdList(userIdList);
 		
-		for (int i = 0; i < length; i++) {
-			enrollService.enrollUser(Integer.parseInt(userIds[i]), bagId);
-		}
+		enrollService.enrollUser(members,foundBag.getId());
 		return "redirect:/index";
 	}
 

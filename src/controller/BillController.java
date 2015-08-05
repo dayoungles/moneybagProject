@@ -53,7 +53,7 @@ public class BillController {
 		String realPath = request.getSession().getServletContext()
 				.getRealPath("/");
 		realPath += "/bill_img/";
-		FileUpload upload = uploadService.fileSetting(file, realPath);
+		FileUpload upload = uploadService.uploadFile(file, realPath);
 		bill.setFileName(upload.getName());
 		
 		billService.createBill(bill, user);
