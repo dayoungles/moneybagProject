@@ -69,5 +69,9 @@ public class UserService {
 		return userDao.getBagMembers(bagId);
 	}
 
+	public User getUserByUserId(int userId) {
+		return userDao.getUserByUserId(userId);
+	}
+
 
 }

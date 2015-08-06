@@ -22,5 +22,9 @@ public class BoardService {
 	public List getBoardList(int bagId) {
 		return boardDao.getBoardListByBagId(bagId);
 	}
+
+	public Board getBoardByBoardId(int boardId) {
+		return boardDao.getBoard(boardId);
+	}
 	
 }

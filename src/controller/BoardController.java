@@ -10,12 +10,14 @@ import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import service.BoardService;
+import service.UserService;
 
 @Controller
 @RequestMapping("/board")
@@ -26,10 +28,12 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping("/list/{bagId}")
-	public String showBoard(@PathVariable("bagId") int bagId, Model model){
+	public String showBoardList(@PathVariable("bagId") int bagId, Model model){
 		List boardList = boardService.getBoardList(bagId);
-		logger.debug("boardList:{}", boardList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("bagId", bagId);
 		return "/board/boardList";
@@ -49,5 +53,12 @@ public class BoardController {
 		return "redirect:/board/list/"+board.getMoneybagId();
 	}
 	
-	
+	@RequestMapping("/showBoard/{boardId}")
+	public String showBoard(@PathVariable("boardId") int boardId, Model model){
+		Board board = boardService.getBoardByBoardId(boardId);
+		User user = userService.getUserByUserId(board.getWriterId());
+		model.addAttribute("user", user.getName());
+		model.addAttribute("board", board);
+		return "/board/showBoard";
+	}
 }

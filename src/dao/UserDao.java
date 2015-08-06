@@ -78,4 +78,9 @@ public class UserDao {
 		return this.jdbctemplate.queryForList(sql, new Object[]{bagId});
 	}
 
+	public User getUserByUserId(int userId) {
+		String sql="SELECT * FROM user where userId=?";
+		return this.jdbctemplate.queryForObject(sql, new Object[] {userId}, this.userMapper);
+	}
+
 }

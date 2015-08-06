@@ -3,11 +3,11 @@ package model;
 public class Board {
 	int boardId;
 	int moneybagId;
-	public String writer;
+	public int writerId;
 	public String title;
 	public String content;
-	int hit;
-	String dateTime;
+	int hits;
+	String time;
 	
 	public int getBoardId() {
 		return boardId;
@@ -21,11 +21,11 @@ public class Board {
 	public void setMoneybagId(int moneybagId) {
 		this.moneybagId = moneybagId;
 	}
-	public String getWriter() {
-		return writer;
+	public int getWriterId() {
+		return writerId;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setWriterId(int writer) {
+		this.writerId = writer;
 	}
 	public String getTitle() {
 		return title;
@@ -39,22 +39,22 @@ public class Board {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getHit() {
-		return hit;
+	public int getHits() {
+		return hits;
 	}
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setHits(int hit) {
+		this.hits = hit;
 	}
-	public String getDateTime() {
-		return dateTime;
+	public String getTime() {
+		return time;
 	}
-	public void setDateTime(String dateTime) {
-		this.dateTime = dateTime;
+	public void setTime(String dateTime) {
+		this.time = dateTime;
 	}
 	@Override
 	public String toString() {
-		return "Board [boardId=" + boardId + ", moneybagId=" + moneybagId + ", writer=" + writer + ", title=" + title + ", content=" + content
-				+ ", hit=" + hit + ", dateTime=" + dateTime + "]";
+		return "Board [boardId=" + boardId + ", moneybagId=" + moneybagId + ", writer=" + writerId + ", title=" + title + ", content=" + content
+				+ ", hits=" + hits + ", time=" + time + "]";
 	}
 	
 	
