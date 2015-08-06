@@ -5,10 +5,20 @@ import java.util.ArrayList;
 public class BagMember {
 	String[] userIdList;
 	int memberNum;
-	ArrayList<User> memberList = new ArrayList<User>();
 	
-	public BagMember() {
+	public BagMember(String userIdList, int adminId) {
+		userIdList = addAdminToList(userIdList, adminId);
+		setUserIdList(userIdList);
 		
+	}
+
+	private String addAdminToList(String userIdList, int adminId) {
+		if(userIdList.length()==0){
+			userIdList+=adminId;
+		}else{
+			userIdList+=","+adminId;
+		}
+		return userIdList;
 	}
 
 	public void setUserIdList(String userIdList){
@@ -28,11 +38,5 @@ public class BagMember {
 		return this.memberNum;
 	}
 	
-	public void setMemberList(ArrayList<User> memberList){
-		this.memberList = memberList;
-	}
-	
-	public ArrayList<User> getMemberList(){
-		return this.memberList;
-	}
+
 }

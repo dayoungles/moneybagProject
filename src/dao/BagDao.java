@@ -72,7 +72,7 @@ public class BagDao {
 	}
 	
 	public Bag findLastCreatedBagByUserId(int adminId){
-		String sql = "SELECT moneybagId from moneybag where admin=? order by moneybagId desc limit 1"; 
+		String sql = "SELECT * from moneybag where admin=? order by moneybagId desc limit 1"; 
 		return jdbcTemplate.queryForObject(sql,new Object[]{adminId} , bagMapper);
 	}
 

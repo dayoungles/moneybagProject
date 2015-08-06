@@ -14,9 +14,9 @@ public class UserMappingDao {
 
 	public void enrollUser(BagMember userList, int bagId) {
 		String sql = "insert into user_moneybag_mapping(userId, moneybagId) values (?,?)";
-
+		String[] userIdList= userList.getUserIds();
 		for(int i = 0; i < userList.getMemberNum();i++){
-			jdbcTemplate.update(sql,userList.getUserIds()[i] , bagId);
+			jdbcTemplate.update(sql,userIdList[i] , bagId);
 		}
 	}
 

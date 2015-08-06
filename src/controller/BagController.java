@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import service.BagService;
+import service.BillService;
 import service.UploadService;
 import service.UserBagMappingService;
-import service.BillService;
 import service.UserService;
 
 @Controller
@@ -60,26 +61,24 @@ public class BagController {
 	 * @param session
 	 * @param 
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/createBag", method = RequestMethod.POST)
 	public String createBag(@RequestParam("info") String info,
 			@RequestParam("userList") String userIdList,
 			@RequestParam("file") MultipartFile file, 
 			HttpSession session,
-			HttpServletRequest request) {
+			HttpServletRequest request) throws Exception {
 		//user session get
 		User user = (User) session.getAttribute("user");
+		ServletContext sc = request.getServletContext();
 		//file upload
-		FileUpload upload = uploadService.uploadFile(file, "bagImg");
+		FileUpload upload = uploadService.uploadFile(file, "bagImg/", sc);
 		//make bag
 		Bag bag = new Bag(user.getId(), user.getAccount(), info, upload.getName());
 		Bag foundBag = bagService.createBag(bag);
 		// enroll members
-		userIdList += ","+user.getId();// 프론트에서 받아온 멤버리스트에 생성하는 유저의 id를 추가 
-		BagMember members = new BagMember();
-		members.setUserIdList(userIdList);
-		
-		enrollService.enrollUser(members,foundBag.getId());
+		enrollService.enrollUser(new BagMember(userIdList, user.getId()),foundBag.getId());
 		return "redirect:/index";
 	}
 

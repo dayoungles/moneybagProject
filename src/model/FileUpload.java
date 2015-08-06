@@ -18,13 +18,15 @@ public class FileUpload {
 	}
 	public FileUpload(MultipartFile file2) {
 		this.multipartFile = file2;
-		
+		isFileExist(file2);
+	}
+	
+	private void isFileExist(MultipartFile file2) {
 		if(file2.getSize() == 0){
 			this.nameOfmf = DEFAULT;
 		}else {
 			setName();
 		}
-		
 	}
 	
 	

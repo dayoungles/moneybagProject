@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -42,18 +43,16 @@ public class BillController {
 			@RequestParam("usedMoney") String usedMoney,
 			@RequestParam("info") String info, 
 			@RequestParam("billName") String billName,
-			Model model,HttpServletRequest request,  HttpSession session) {
+			Model model,HttpServletRequest request,  HttpSession session) throws Exception {
 		User user = (User) session.getAttribute("user");
 		Bill bill = new Bill(billName, usedMoney, info, Integer.parseInt(bagId));
 		
 		
-		if(uploadService.isImgFile(file) == false){
-			return "이미지 파일만 입력 가능합니다";
-		}
+		ServletContext sc = request.getServletContext();
 		String realPath = request.getSession().getServletContext()
 				.getRealPath("/");
 		realPath += "/bill_img/";
-		FileUpload upload = uploadService.uploadFile(file, realPath);
+		FileUpload upload = uploadService.uploadFile(file, realPath, sc);
 		bill.setFileName(upload.getName());
 		
 		billService.createBill(bill, user);

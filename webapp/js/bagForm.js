@@ -28,6 +28,7 @@ btn.addEventListener("click", function() {
 			}
 
 		}
+		el_input.value="";
 	}).bind(this));
 	oAjax.service();
 });
