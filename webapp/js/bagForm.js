@@ -11,12 +11,12 @@ btn.addEventListener("click", function() {
 	emailAdrs = el_input.value;
 	var oAjax = new ajax("GET", "/api/addMember?email=" + emailAdrs, (function(
 			response) {
-		if (response != "false") {
+		if (response != "") {
 			var el_member = document.querySelector(".members");
 			var span_cloned = el_member.querySelector(".user").cloneNode(true);
 			var userInfo = JSON.parse(response);
-			span_cloned.innerHTML = userInfo.userName + " ";
-			span_cloned.setAttribute("value", userInfo.userId);
+			span_cloned.innerHTML = userInfo.name + " ";
+			span_cloned.setAttribute("value", userInfo.id);
 			el_member.insertAdjacentElement("beforeend", span_cloned);
 		} else {
 			var page = document.querySelector(".mailSender");

@@ -59,4 +59,5 @@ public class BillController {
 		billService.createBill(bill, user);
 		return "redirect:/showBag/" + bagId;
 	}
+	
 }

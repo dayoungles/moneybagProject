@@ -14,14 +14,18 @@ import dao.BillDao;
 public class BillService {
 
 	@Autowired
-	BillDao roundDao;
+	BillDao billDao;
 
 	public List<Bill> findAllBillsByBagId(int bagId) {
-		return roundDao.findAllBillsByBagId(bagId);
+		return billDao.findAllBillsByBagId(bagId);
 	}
 
 	public void createBill(Bill bill, User user) {
-		roundDao.createBill(bill, user);
+		billDao.createBill(bill, user);
+	}
+
+	public Bill getBillByBill_id(int bill_id) {
+		return billDao.getBill(bill_id);
 	}
 
 }

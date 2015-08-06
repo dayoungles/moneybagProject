@@ -56,4 +56,9 @@ public class BillDao {
 		
 	}
 
+	public Bill getBill(int bill_id) {
+		String sql="select * from bill where bill_id=?";
+		return jdbcTemplate.queryForObject(sql, new Object[]{bill_id}, this.billMapper);
+	}
+
 }
