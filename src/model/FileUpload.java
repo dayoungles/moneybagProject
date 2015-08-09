@@ -22,13 +22,12 @@ public class FileUpload {
 	}
 	
 	private void isFileExist(MultipartFile file2) {
-		if(file2.getSize() == 0){
+		if(file2.isEmpty()){
 			this.nameOfmf = DEFAULT;
 		}else {
 			setName();
 		}
 	}
-	
 	
 	public MultipartFile getFile() {
 		return multipartFile;

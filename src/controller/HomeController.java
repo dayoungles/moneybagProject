@@ -27,7 +27,6 @@ public class HomeController {
 	@RequestMapping("index")
 	public String showHome(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		logger.debug("user:{}", user);
 		List<Bag> bagList = homeService.getEnrolledBagListById(user.getId());
 		model.addAttribute("bagList", bagList);
 		logger.debug("bagList:{}", bagList);

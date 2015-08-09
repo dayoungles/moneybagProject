@@ -5,15 +5,15 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import service.UploadService;
+
 @WebListener
 public class CustomContextListener implements ServletContextListener{
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext sc = sce.getServletContext();
-		sc.setAttribute("realPath", sc.getRealPath("/"));
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!custom contextListener worked");
-		
+		UploadService.path = sc.getRealPath("/");
 	}
 
 	@Override

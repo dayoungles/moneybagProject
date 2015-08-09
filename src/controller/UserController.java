@@ -38,7 +38,7 @@ public class UserController {
 
 	@RequestMapping("/loginCheck")
 	public String checkLogin(@Valid @ModelAttribute("user") User user, BindingResult result,Model model,
-			HttpSession session) {
+			HttpSession session) throws Exception {
 		// 로그인 가능한지 확인하는 함수 사용
 		
 		if(result.hasErrors()){

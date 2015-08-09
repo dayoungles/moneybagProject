@@ -12,7 +12,7 @@
 	
 	<div class="billArea" >
 		<c:forEach var="bill" items="${billList}">
-			<div class="bill" bill_id="${bill.bill_id }"style="background-image: url(/bill_img/${bill.fileName}); background-size:100% 100%">
+			<div class="bill" bill_id="${bill.bill_id}"style="background-image: url(/bill_img/${bill.fileName}); background-size:100% 100%">
 				이름: ${bill.billName}<br/>
 				날짜: ${bill.createdDate}<br /> 
 				사용금액: ${bill.usedMoney }<br />

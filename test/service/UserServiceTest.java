@@ -32,7 +32,6 @@ public class UserServiceTest {
 		// int result = 100;
 		// when(userDao.get()).thenReturn(10);
 		//
-		userService.insertUser(user);
 
 		verify(userDao, times(1)).createUser(user);
 

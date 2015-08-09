@@ -15,10 +15,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UploadService {
-	private static String path;
-
 	private static final Logger logger = LoggerFactory.getLogger(UploadService.class);
-
+	private static final String NO_FILE = "default.png";
+	public static String path;
+	
+//	private String uploadPath;
+//	
+//	@Value("${upload.path}")
+//	public void setUploadPath(String uploadPath) {
+//		this.uploadPath = uploadPath;
+//	}
+	
+	
 	/**
 	 * file upload. 업로드할 위치
 	 * 
@@ -29,21 +37,25 @@ public class UploadService {
 	 * @return
 	 * @throws Exception 
 	 */
-	public FileUpload uploadFile(MultipartFile mfile, String filePos, ServletContext sc) throws Exception {
-		this.path = (String) sc.getAttribute("realPath");
-		logger.debug("path:{}", this.path);
+	public FileUpload uploadFile(MultipartFile mfile, String filePos) throws Exception {
 		if (isImgFile(mfile) == false) {
-			throw new Exception("not img file");// exception 발생 시키라는데..익셉션을 피해갈 방법은 정녕 없는 것인가
+			throw new Exception("not img file");
 		}
-		
-
 		// file을 업로드 하려고 하는 폴더가 없으면 만들어준다.
 		File folder = new File(filePos);
 		if (!folder.exists()) {
 			folder.mkdir();
 		}
+		
 		FileUpload upload = new FileUpload(mfile);
-		File file = new File(path + filePos+ upload.getName());
+		String path = this.path+filePos+upload.getName();
+		logger.debug(path+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		if(upload.getName().equals(NO_FILE)){
+			logger.info("default?");
+			return upload;
+		}
+		
+		File file = new File(this.path + filePos+ upload.getName());
 		
 		try {
 			mfile.transferTo(file);

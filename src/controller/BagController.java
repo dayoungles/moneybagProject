@@ -31,7 +31,8 @@ import service.UserService;
 
 @Controller
 public class BagController {
-
+	final String imgFolder="bagImg/";
+	
 	private static final Logger logger = LoggerFactory
 			.getLogger(BagController.class);
 	@Autowired
@@ -71,9 +72,9 @@ public class BagController {
 			HttpServletRequest request) throws Exception {
 		//user session get
 		User user = (User) session.getAttribute("user");
-		ServletContext sc = request.getServletContext();
+//		ServletContext sc = request.getServletContext();
 		//file upload
-		FileUpload upload = uploadService.uploadFile(file, "bagImg/", sc);
+		FileUpload upload = uploadService.uploadFile(file, this.imgFolder);
 		//make bag
 		Bag bag = new Bag(user.getId(), user.getAccount(), info, upload.getName());
 		Bag foundBag = bagService.createBag(bag);

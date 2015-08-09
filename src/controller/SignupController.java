@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +29,7 @@ import service.UserService;
 @RequestMapping("/signup")
 public class SignupController {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(SignupController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SignupController.class);
 
 	@Autowired
 	private UserService userService;
@@ -51,9 +50,8 @@ public class SignupController {
 	 */
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String createUser(@Valid User user, BindingResult result,
-			@RequestParam("multipartFile") MultipartFile file, Model model,
-			HttpSession session, HttpServletRequest request) {
+	public String createUser(@Valid User user, BindingResult result, @RequestParam("multipartFile") MultipartFile file, Model model,
+			HttpSession session, HttpServletRequest request) throws Exception {
 
 		// validation 에러 발생 시
 		if (result.hasErrors()) {
@@ -62,30 +60,23 @@ public class SignupController {
 			for (ObjectError error : list) {
 				logger.debug("error:{}", error.getDefaultMessage());
 			}
-
-			return "user/signup";
-
+			throw new Exception("형식 좀 맞ㅊㅊ ");
 		}
 		if (userService.isExistUser(user.getEmail())) {
-			return "이미 가입된 이메일입니다.";// 물론 이렇게 하면 에러가 납니다 ^_^ requestBody를 이용해서
-									// js로 처리하는 방법을 봐야 합니다.
+			throw new Exception("가입된 유저요 로그인 해 ");// 물론 이렇게 하면 에러가 납니다 ^_^
+													// requestBody를 이용해서// js로
+													// 처리하는 방법을 봐야 합니다.
 		}
-		if (uploadService.isImgFile(file) == false) {
-			return "이미지 파일만 입력 가능합니다";
-		}
-		String realPath = request.getSession().getServletContext()
-				.getRealPath("/");
-		realPath += "/userImg/";
 
-		FileUpload upload = uploadService.uploadFile(file, realPath);
+		ServletContext sc = request.getServletContext();
+		FileUpload upload = uploadService.uploadFile(file, "userImg/", sc);
 
 		user.setFileName(upload.getName());
 		userService.insertUser(user);
 
 		// 다음 페이지를 위한 작업
 		model.addAttribute(user);
-		session.setAttribute("user",
-				userService.selectUserByEmail(user.getEmail()));
+		session.setAttribute("user", userService.selectUserByEmail(user.getEmail()));
 		return "redirect:/index";
 	}
 

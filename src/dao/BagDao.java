@@ -66,8 +66,8 @@ public class BagDao {
 	}
 
 	public Bag insertBag(Bag bag) {
-		String sql = "insert into moneybag (admin, account, info) values(?,?,?)";
-		jdbcTemplate.update(sql, bag.getAdminId(), bag.getAccount(), bag.getInfo());
+		String sql = "insert into moneybag (admin, account, info, fileName) values(?,?,?,?)";
+		jdbcTemplate.update(sql, bag.getAdminId(), bag.getAccount(), bag.getInfo(), bag.getfileName());
 		return findLastCreatedBagByUserId(bag.getAdminId());
 	}
 	

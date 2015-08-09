@@ -23,16 +23,15 @@ public class UserService {
 	@Autowired
 	UserMappingDao userMappingDao;
 
-	public void insertUser(User user) {
+	public void insertUser(User user) throws Exception {
 		// 이미 가입된 email인지 확인
 		if (isExistUser(user.getEmail())) {
-			logger.info("이미 가입된 유저 메일. 가입 반려. ");
-			return;
+			throw new Exception("이미 가입된 유저 메일. 가입 반려 ");
 		}
 		userDao.createUser(user);
 	}
 
-	public boolean isExistUser(String email) {
+	public boolean isExistUser(String email)  {
 		User resultUser = userDao.getUserByEmail(email);
 		if (resultUser == null) {
 			return false;
@@ -45,14 +44,14 @@ public class UserService {
 		return resultUser;
 	}
 
-	public User checkLoginValidation(User user) {
+	public User checkLoginValidation(User user) throws Exception {
 		// user정보가 있는지 확인-> isExistUser()
 		if (!isExistUser(user.getEmail())) {
-			return null;
+			throw new Exception("가입된 유저가 아니라고 ");
 		} else {
 			User foundUser = selectUserByEmail(user.getEmail());
 			if (!foundUser.getPassword().equals(user.getPassword())) {
-				return null;
+				throw new Exception("비번이 안 맞아 난 비번을 생으로 가지고 있거든.");
 			}
 			return foundUser;
 		}
@@ -72,6 +71,4 @@ public class UserService {
 	public User getUserByUserId(int userId) {
 		return userDao.getUserByUserId(userId);
 	}
-
-
 }
