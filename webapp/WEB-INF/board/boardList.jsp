@@ -9,8 +9,8 @@
 			<c:forEach var="board" items="${boardList}">
 				<a href="/board/showBoard/${board.boardId}">
 					<div class="board">
-						title:${board.title}<br /> upload time:${board.time }<br />
-						writer:${board.writer }<br /> hits: ${board.hits }<br />
+						title:${board.title}<br /> upload time:${board.time}<br />
+						writer:${board.writer}<br /> hits: ${board.hits}<br />
 					</div>
 				</a>
 			</c:forEach>

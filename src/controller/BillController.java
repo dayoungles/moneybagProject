@@ -24,7 +24,7 @@ import service.UploadService;
 @Controller
 @RequestMapping("bill")
 public class BillController {
-	private final String imgFolder = "bill_id/";
+	private final String imgFolder = "bill_img/";
 	
 	@Autowired
 	BillService billService;
@@ -46,8 +46,7 @@ public class BillController {
 		User user = (User) session.getAttribute("user");
 //		Bill bill = new Bill(billName, usedMoney, info, Integer.parseInt(bagId));
 		
-		ServletContext sc = request.getServletContext();
-		FileUpload upload = uploadService.uploadFile(file, this.imgFolder, sc);
+		FileUpload upload = uploadService.uploadFile(file, this.imgFolder);
 		bill.setFileName(upload.getName());
 		bill.setMoneybagId(Integer.parseInt(bagId));
 		

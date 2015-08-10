@@ -68,8 +68,7 @@ public class SignupController {
 													// 처리하는 방법을 봐야 합니다.
 		}
 
-		ServletContext sc = request.getServletContext();
-		FileUpload upload = uploadService.uploadFile(file, "userImg/", sc);
+		FileUpload upload = uploadService.uploadFile(file, "userImg/");
 
 		user.setFileName(upload.getName());
 		userService.insertUser(user);

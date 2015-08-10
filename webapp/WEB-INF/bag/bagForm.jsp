@@ -52,7 +52,7 @@
 		</div>
 		대표 이미지 upload: 대표 이미지: <input type="file" name="file" />
 		<div class="prevImg"></div>
-		<input type="hidden" name="userList" id="hidden"/>
+		<input type="hidden" name="userList" id="hidden" value=""/>
 		<button type="submit">제출</button>
 	</form>
 	<div class="mailSender hide">

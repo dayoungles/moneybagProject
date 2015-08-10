@@ -33,7 +33,7 @@ public class BoardDao {
 	};
 	
 	public void insertBoard(Board board) {
-		String sql="INSERT INTO board (moneybagId,writer, title, content)  VALUE(?,?,?,?)";
+		String sql="INSERT INTO board (moneybagId, writer, title, content)  VALUE(?,?,?,?)";
 		jdbcTemplate.update(sql, board.getMoneybagId(), board.getWriterId(), board.getTitle(), board.getContent());
 	}
 

@@ -13,11 +13,7 @@ public class BagMember {
 	}
 
 	private String addAdminToList(String userIdList, int adminId) {
-		if(userIdList.length()==0){
-			userIdList+=adminId;
-		}else{
-			userIdList+=","+adminId;
-		}
+		userIdList+=adminId;
 		return userIdList;
 	}
 

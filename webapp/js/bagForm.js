@@ -6,6 +6,7 @@ var el_input = document.getElementById("addMember");
 var btn = document.getElementById("addButton");
 var submitBtn = document.querySelector("button[type='submit']");
 var emailAdrs;
+var userIdList;
 // ajax통신으로 존재하는 유저인지 확인하는 함수
 btn.addEventListener("click", function() {
 	emailAdrs = el_input.value;
@@ -18,6 +19,7 @@ btn.addEventListener("click", function() {
 			span_cloned.innerHTML = userInfo.name + " ";
 			span_cloned.setAttribute("value", userInfo.id);
 			el_member.insertAdjacentElement("beforeend", span_cloned);
+			addMemberToList(userInfo.id);
 		} else {
 			var page = document.querySelector(".mailSender");
 			page.className = "mailSender";
@@ -33,17 +35,11 @@ btn.addEventListener("click", function() {
 	oAjax.service();
 });
 
-submitBtn.addEventListener("click", function() {
-	// span에 들어있는 멤버들 이름을 모두 찾아서 배열로 생성해서 서버로 전송
-	var userList = document.getElementsByClassName("user");
-	var nameList = "";
-	var userSize = userList.length;
-	for (var i = 1; i < userSize; i++) {// sample span제외하고 1부터 시작
-		nameList += userList[i].getAttribute("value") + ",";
-	}
-	var hiddenVal = document.getElementById("hidden");
-	hiddenVal.value = nameList;
-});
+// span에 들어있는 멤버들 이름을 모두 찾아서 배열로 생성해서 서버로 전송
+function addMemberToList (member) {
+	var el_hid = document.getElementById("hidden");
+	el_hid.value+=member+",";
+}
 
 var emailBtn = document.querySelector("#email");
 emailBtn.addEventListener("click", function() {

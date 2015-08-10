@@ -42,9 +42,9 @@ public class UploadService {
 			throw new Exception("not img file");
 		}
 		// file을 업로드 하려고 하는 폴더가 없으면 만들어준다.
-		File folder = new File(filePos);
+		File folder = new File(this.path+filePos);
 		if (!folder.exists()) {
-			folder.mkdir();
+			folder.mkdirs();
 		}
 		
 		FileUpload upload = new FileUpload(mfile);

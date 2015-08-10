@@ -58,8 +58,9 @@ public class BoardController {
 	public String showBoard(@PathVariable("boardId") int boardId, Model model){
 		Board board = boardService.getBoardByBoardId(boardId);
 		User user = userService.getUserByUserId(board.getWriterId());
-		model.addAttribute("user", user.getName());
+		model.addAttribute("user", user);
 		model.addAttribute("board", board);
+		model.addAttribute("bagId", board.getMoneybagId());
 		return "/board/showBoard";
 	}
 	
