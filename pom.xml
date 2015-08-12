@@ -5,7 +5,13 @@
 	<artifactId>takemymoney</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-
+	<repositories>
+		<repository>
+			<id>oss-jfrog-artifactory</id>
+			<name>oss-jfrog-artifactory-releases</name>
+			<url>http://oss.jfrog.org/artifactory/oss-release-local</url>
+		</repository>
+	</repositories>
 	<profiles>
 		<profile>
 			<!-- 실제로 구분해서 사용해야될 필요가 있을 떄 id를 살려서 빌드해야한다. "maven profile 설정" -->
@@ -34,6 +40,23 @@
 
 
 	<dependencies>
+		<!-- swagger -->
+		<dependency>
+			<groupId>org.ajar</groupId>
+			<artifactId>swagger-spring-mvc-ui</artifactId>
+			<version>0.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mangofactory</groupId>
+			<artifactId>swagger-springmvc</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 		<!-- unit testing -->
 		<dependency>
 			<groupId>junit</groupId>

@@ -18,7 +18,9 @@
 	<context:component-scan base-package="dao" />
 	<context:component-scan base-package="service" />
 	<context:component-scan base-package="email" />
-
+	
+	<!-- for swagger setting  -->
+	<bean class="conf.SwaggerConf" />
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/WEB-INF/" p:suffix=".jsp" />
@@ -28,6 +30,6 @@
 		class="org.springframework.context.support.ResourceBundleMessageSource"
 		p:basename="messages" p:defaultEncoding="UTF-8" />
 
-<!-- 	<bean id="jacksonMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" /> -->
+	<!-- <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" 
+		/> -->
 </beans>
