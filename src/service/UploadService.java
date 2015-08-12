@@ -37,9 +37,9 @@ public class UploadService {
 	 * @return
 	 * @throws Exception 
 	 */
-	public FileUpload uploadFile(MultipartFile mfile, String filePos) throws Exception {
+	public FileUpload uploadFile(MultipartFile mfile, String filePos) throws NotImgException{
 		if (isImgFile(mfile) == false) {
-			throw new Exception("not img file");
+			throw new NotImgException("not img file");
 		}
 		// file을 업로드 하려고 하는 폴더가 없으면 만들어준다.
 		File folder = new File(this.path+filePos);

@@ -15,12 +15,28 @@ div.billArea{
 	display: block;
 }
 div.bill{
-	width: 150px;
-	height:150px;
-	background:#FFF;
-	border-radius:10px;
-	padding: 10px;
-	margin: 20px;
+	width: 120px;
+	height:160px;
+	background:#C8D9F2;/*색깔 변경하는게 좋을 */
+	margin: 30px;
 	display:inline-block;
 	
+}
+
+img.bill_img{
+	background-size:100% 100%;
+	
+}
+
+div.bill_info{
+	background: #ffc4c4;
+}
+
+p.billName, p.usedMoney, p.createdDate{
+	color:white;
+	font-size:13px;
+}
+
+P.billName{
+	font-size:20px;
 }

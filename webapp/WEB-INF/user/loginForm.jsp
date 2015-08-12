@@ -5,13 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/user/login.css">
 </head>
+
 <body>
-	<form:form modelAttribute="user" method="post" action="/user/loginCheck">	
-		email:<form:input path="email" />
-		pw:<form:password path="password" />
-	<button type="submit">제출</button>
-	</form:form>
+	<div class="loginBox">
+		<div class="box">
+			<form:form modelAttribute="user" method="post"
+				action="/user/loginCheck">	
+			<form:input path="email" class="input" placeholder="EMAIL"/>
+				<br />
+			<form:password path="password" class="input" placeholder="PASSWORD"/>
+				<br />
+				<button type="submit">제출</button>
+			</form:form>
+		</div>
+	</div>
 </body>
 </html>

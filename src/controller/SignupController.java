@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import exception.ValidException;
 import service.UploadService;
 import service.UserService;
 
@@ -60,12 +61,10 @@ public class SignupController {
 			for (ObjectError error : list) {
 				logger.debug("error:{}", error.getDefaultMessage());
 			}
-			throw new Exception("형식 좀 맞ㅊㅊ ");
+			throw new ValidException("validation exception ");
 		}
 		if (userService.isExistUser(user.getEmail())) {
-			throw new Exception("가입된 유저요 로그인 해 ");// 물론 이렇게 하면 에러가 납니다 ^_^
-													// requestBody를 이용해서// js로
-													// 처리하는 방법을 봐야 합니다.
+			throw new NotExistException("가입된 유저요 로그인 해 ");
 		}
 
 		FileUpload upload = uploadService.uploadFile(file, "userImg/");

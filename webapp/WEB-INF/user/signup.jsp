@@ -5,32 +5,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/user/login.css">
 <title>Insert title here</title>
 </head>
 <body>
 	signup page
 	<br />
-	<form:form method="post" action="/signup/insert" modelAttribute="user"
-		enctype="multipart/form-data">
-		email:<form:input path="email" />
-		<form:errors path="email" cssClass="error" />
-		<br />
-		password:<form:password path="password" />
-		<form:errors path="password" cssClass="error" />
-		<br />
-		name <form:input path="name" />
-		<form:errors path="name" cssClass="error" />
-		<br />
-		
-		account	<form:input path="account" />
-		<form:errors path="account" cssClass="error" />
-		<br />
+	<div class="signupBox">
+		<div class="box">
+			<form:form method="post" action="/signup/insert"
+				modelAttribute="user" enctype="multipart/form-data">
+				<form:input path="email" class="input" placeholder="EMAIL" />
+				<form:errors path="email" cssClass="error" />
+				<br />
+				<form:password path="password" class="input" placeholder="PASSWORD" />
+				<form:errors path="password" cssClass="error" />
+				<br />
+				<form:input path="name" class="input" placeholder="NAME" />
+				<form:errors path="name" cssClass="error" />
+				<br />
 
-		<!-- image upload -->
+				<form:input path="account" class="input" placeholder="BANK ACCOUNT" />
+				<form:errors path="account" cssClass="error" />
+				<br />
+
+				<!-- image upload -->
 		 대표 이미지: <input type="file" name="multipartFile" />
 
-		<input type="submit" name="submit" value="submit" />
+				<input type="submit" name="submit" value="submit" class="button"/>
 
-	</form:form>
+			</form:form>
+		</div>
+	</div>
 </body>
 </html>

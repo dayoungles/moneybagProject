@@ -56,7 +56,7 @@ public class BagDao {
 	 * @return
 	 */
 	public List<Bag> getEnrolledMoneybag(int userId) {
-		String sql = "select * from moneybag join user_moneybag_mapping on moneybag.moneybagId = user_moneybag_mapping.moneybagId where user_moneybag_mapping.userId=?";
+		String sql = "select * from moneybag left join user_moneybag_mapping on moneybag.moneybagId = user_moneybag_mapping.moneybagId where user_moneybag_mapping.userId=?";
 		try {
 			return jdbcTemplate.query(sql, new Object[] { userId }, bagMapper);
 		} catch (EmptyResultDataAccessException e) {
@@ -70,19 +70,17 @@ public class BagDao {
 		jdbcTemplate.update(sql, bag.getAdminId(), bag.getAccount(), bag.getInfo(), bag.getfileName());
 		return findLastCreatedBagByUserId(bag.getAdminId());
 	}
-	
-	public Bag findLastCreatedBagByUserId(int adminId){
-		String sql = "SELECT * from moneybag where admin=? order by moneybagId desc limit 1"; 
-		return jdbcTemplate.queryForObject(sql,new Object[]{adminId} , bagMapper);
+
+	public Bag findLastCreatedBagByUserId(int adminId) {
+		String sql = "SELECT * from moneybag where admin=? order by moneybagId desc limit 1";
+		return jdbcTemplate.queryForObject(sql, new Object[] { adminId }, bagMapper);
 	}
 
 	public Bag findBagByBagId(int bagId) {
 		String sql = "select * from moneybag where moneybagId=?";
-		logger.debug("sql:{}, bagId:{}", sql, bagId);
 		try {
-			Bag bag = jdbcTemplate.queryForObject(sql, new Object[] { bagId },
-					bagMapper);
-			
+			Bag bag = jdbcTemplate.queryForObject(sql, new Object[] { bagId }, bagMapper);
+
 			return bag;
 			// return jdbcTemplate.queryForObject(sql, new
 			// BeanPropertyRowMapper<Bag>(Bag.class), bagId);
@@ -92,10 +90,8 @@ public class BagDao {
 	}
 
 	public void insertPhoto(String fileName, int moneybagId) {
-		String sql ="update moneybag set fileName=? where moneybagId=?";
-		jdbcTemplate.update(sql, new Object[]{fileName, moneybagId});
+		String sql = "update moneybag set fileName=? where moneybagId=?";
+		jdbcTemplate.update(sql, new Object[] { fileName, moneybagId });
 	}
-
-	
 
 }

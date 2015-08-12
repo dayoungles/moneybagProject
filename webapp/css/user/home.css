@@ -1,5 +1,5 @@
 body{
-	background: #D5D9DF;
+	background: #e5f6d5;
 }
 
 header{
@@ -7,7 +7,7 @@ header{
 	/* height: 50px; */
 	position:relative;
 	clear:both;
-	background:#2C4770;
+	background:#a4d573;
 	opacity: 0.6;
 	
 }
@@ -19,8 +19,8 @@ div.menu{
 	display: inline-block;
 	margin: 0px 20px;
 	background: #FFF;
-	border-radius:10px;
-	
+/* 	border-radius:10px;
+	 */
 	
 }
 container{
@@ -40,20 +40,58 @@ div.line{
 }
 
 div.bag{
-	width:200px;
-	height:200px;
+	width:120px;
+	height:160px;
 	display: inline-block;
-	border: 1px solid #2C4770;
+	/* border: 1px solid; */
 	background: #C8D9F2;
+	margin:30px;
+	
 }
 
+div.info{
+	height:50%;
+	padding:5px;
+}
 
+div.info_box{
+	background: #ffc4c4;
+}
+
+div.bagImg{
+	background-size: 100% 100%;
+}
+p.title{
+	color:white;
+	font-size:20px;
+}
+
+p.since{
+	color:white;
+	font-size:13px;
+}
 sidebar {
 	float:left;
 	margin:5px;
 	position:relative;
 	width:20%;
-	height:500px;
+	height:1000px;/*window 크기에 맞게 길게 하는 법은 뭘까요 */
+	background:#d4efb8;
+}
+span#checkPayment, span#uploadBill, span#member, span#freeboard {
+	color:black;
+	font-family: "Nanum Gothic", sans-serif;
+	font-size:20px;
 	
 }
+div.hyper{
+	line-height:43px;
+	vertical-align:middle;
+	margin:10px;
+	background:#e5242e;/*색깔 바꿔야 */
+	width:240px;
+	height:40px;
+}
+
+
 

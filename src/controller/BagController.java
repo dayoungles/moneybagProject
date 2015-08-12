@@ -31,10 +31,9 @@ import service.UserService;
 
 @Controller
 public class BagController {
-	final String imgFolder="bagImg/";
-	
-	private static final Logger logger = LoggerFactory
-			.getLogger(BagController.class);
+	final String imgFolder = "bagImg/";
+
+	private static final Logger logger = LoggerFactory.getLogger(BagController.class);
 	@Autowired
 	BagService bagService;
 
@@ -57,29 +56,28 @@ public class BagController {
 	/**
 	 * 머니백 생성할 때 쓰는 함수. createForm에서 온다.
 	 * 
-	 * @param info: 머니백 이름  
-	 * @param userIdList: 추가하려고 하는 유저들의 userId (형식: "1, 23,123") 
+	 * @param info
+	 *            : 머니백 이름
+	 * @param userIdList
+	 *            : 추가하려고 하는 유저들의 userId (형식: "1, 23,123")
 	 * @param session
-	 * @param 
+	 * @param
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/createBag", method = RequestMethod.POST)
-	public String createBag(@RequestParam("info") String info,
-			@RequestParam("userList") String userIdList,
-			@RequestParam("file") MultipartFile file, 
-			HttpSession session,
-			HttpServletRequest request) throws Exception {
-		//user session get
+	public String createBag(@RequestParam("info") String info, @RequestParam("userList") String userIdList, @RequestParam("file") MultipartFile file,
+			HttpSession session, HttpServletRequest request) throws Exception {
+		// user session get
 		User user = (User) session.getAttribute("user");
-//		ServletContext sc = request.getServletContext();
-		//file upload
+		// ServletContext sc = request.getServletContext();
+		// file upload
 		FileUpload upload = uploadService.uploadFile(file, this.imgFolder);
-		//make bag
+		// make bag
 		Bag bag = new Bag(user.getId(), user.getAccount(), info, upload.getName());
 		Bag foundBag = bagService.createBag(bag);
 		// enroll members
-		enrollService.enrollUser(new BagMember(userIdList, user.getId()),foundBag.getId());
+		enrollService.enrollUser(new BagMember(userIdList, user.getId()), foundBag.getId());
 		return "redirect:/index";
 	}
 
@@ -92,8 +90,7 @@ public class BagController {
 	 * @return
 	 */
 	@RequestMapping("/showBag/{bagId}")
-	public String showBag(@PathVariable("bagId") int bagId,
-			HttpSession session, Model model) {
+	public String showBag(@PathVariable("bagId") int bagId, HttpSession session, Model model) {
 		Bag bag = bagService.findBagByBagId(bagId);
 		List<Bill> billList = billService.findAllBillsByBagId(bagId);
 		logger.debug("bag:{}", bag);
