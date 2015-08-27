@@ -8,7 +8,8 @@
 /webapp/userImg
 /webapp/WEB-INF/.gitignore
 .classpath
-webapp/bagImg/
+webapp/bagImg
 webapp/bill_img
 webapp/userImg
 resources/application-properties.xml
+/bin/
