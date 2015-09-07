@@ -8,7 +8,9 @@
 </head>
 <body>
 	<form action='/signup/addAccount' method="POST">
-		<input type="hidden" value=${user} name="user"/>
+		
+		<input type="hidden" name="name" value="${name}" />
+		<input type="hidden" name="facebookId" value="${fId}" />
 		은행 선택 : 
 		<select>
 			<option value="woori">우리은행</option>
@@ -17,6 +19,7 @@
 			<option value="kb">국민은행</option>
 		</select> 
 		계좌번호 입력 <input type="text" name="account" />
+		<input type="submit" value="submit"/>
 	</form>
 </body>
 </html>
