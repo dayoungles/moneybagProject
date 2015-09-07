@@ -71,4 +71,11 @@ public class UserService {
 	public User getUserByUserId(int userId) {
 		return userDao.getUserByUserId(userId);
 	}
+
+	public User getUserJoinedByFacebook(String fId) {
+		return userDao.getUserByFId(fId); 
+
+		
+	}
+
 }

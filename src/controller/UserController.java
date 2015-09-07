@@ -36,11 +36,19 @@ public class UserController {
 		return "/user/loginForm";
 	}
 
+	/**
+	 * 유저 정보 validation 체크 한 후 로그인 실행 
+	 * @param user
+	 * @param result
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/loginCheck")
 	public String checkLogin(@Valid @ModelAttribute("user") User user, BindingResult result,Model model,
 			HttpSession session) throws Exception {
-		// 로그인 가능한지 확인하는 함수 사용
-		
+		//user가 기입한 validation체크 
 		if(result.hasErrors()){
 			List<ObjectError> list = result.getAllErrors();
 			for (ObjectError error : list) {
@@ -48,15 +56,12 @@ public class UserController {
 			}
 			return "redirect:/user/login";
 		}
-		
-		logger.debug("user:{}", user);
-		if (userService.checkLoginValidation(user) != null) {
-			User foundUser = userService.selectUserByEmail(user.getEmail());
+
+		User foundUser = userService.checkLoginValidation(user);
+		if(foundUser != null){
 			session.setAttribute("user", foundUser);
 			return "redirect:/index";
 		}
-		// 없는 정보라는게 확인되면 어떻게 알려줄꺼야? js로 답변을 주면 될지도 모르겠다. session같은 것들은 어떻게
-		// 처리해야하는지 샘플을 살펴보자
 		return "/user/loginForm";
 	}
 	
@@ -65,12 +70,38 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/user/login";
 	}
-	
+	/**
+	 * 머니백 하나에 소속된 멤버들을 보여줌 
+	 * @param bagId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/showMembers/{bagId}")
 	public String showMembers(@PathVariable ("bagId") int bagId, Model model){
 		List members =userService.getMembersInBag(bagId);
 		model.addAttribute("memberList", members);
 		logger.debug("members:{}", members);
 		return "/bag/showMembers";
+	}
+	
+	/**
+	 * facebook으로 로그인 하는 사람들 체크 
+	 * @param fId
+	 * @param fName
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/fbLogin")
+	public String checkFacebookLogin(String fId, String fName, HttpSession session, Model model){
+		User foundUser = userService.getUserJoinedByFacebook(fId);
+		if(foundUser != null){
+			session.setAttribute("user", foundUser);
+			return "redirect:/index";
+		} else {
+			User user = new User(fId, fName);
+			model.addAttribute("user", user);
+			return "/signup/fbAccount";
+		}
 	}
 }

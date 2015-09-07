@@ -49,7 +49,6 @@ public class SignupController {
 	 * 
 	 * @return String "index"
 	 */
-
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String createUser(@Valid User user, BindingResult result, @RequestParam("multipartFile") MultipartFile file, Model model,
 			HttpSession session, HttpServletRequest request) throws Exception {
@@ -63,9 +62,8 @@ public class SignupController {
 			}
 			throw new ValidException("validation exception ");
 		}
-		if (userService.isExistUser(user.getEmail())) {
-			throw new NotExistException("가입된 유저요 로그인 해 ");
-		}
+		if (userService.isExistUser(user.getEmail())) throw new NotExistException("가입된 유저요 로그인 해 ");
+		
 
 		FileUpload upload = uploadService.uploadFile(file, "userImg/");
 
@@ -89,8 +87,17 @@ public class SignupController {
 			}
 			return "redirect:/user/login";
 		}
-
 		return "redirect:/index";
 	}
 
+	
+	@RequestMapping("/addAccount")
+	public String createUserWithFacebook(@RequestParam("user") User user, @RequestParam("account")String account, HttpSession session, Model model) throws Exception{
+		user.setAccount(account);
+		//facebook에서 사진 정보 가지고 올 필요 없지 않을까.그때그때 요청해서 뿌릴 수 있도록 해도 괜찮을 듯 하다. 
+		userService.insertUser(user);
+		session.setAttribute("user", userService.getUserJoinedByFacebook(user.getFacebookId()));
+		
+		return "redirect:/index";
+	}
 }

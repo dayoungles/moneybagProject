@@ -25,11 +25,18 @@ public class User {
 	private String account;
 	
 	private String fileName;
+
+	private String facebookId;
 	
 	public User() {
 
 	}
-
+	
+	public User(String fId, String fName){
+		this.facebookId = fId;
+		this.name = fName;
+	}
+	
 	public User(String email, String password, String name, String account) {
 		this.email = email;
 		this.password = password;
@@ -89,11 +96,18 @@ public class User {
 		this.fileName = fileName;
 	}
 
+	public void setFacebookId(String facebookId) {
+		this.facebookId = facebookId;
+	}
+	
+	public String getFacebookId() {
+		return this.facebookId;
+	}
+
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", password=" + password + ", name="
-				+ name + ", id=" + id + ", account=" + account + ", fileName="
-				+ fileName + "]";
+		return "User [email=" + email + ", password=" + password + ", name=" + name + ", id=" + id + ", account=" + account + ", fileName="
+				+ fileName + ", facebookId=" + facebookId + "]";
 	}
 
 }

@@ -31,6 +31,7 @@ public class UserDao {
 			user.setId(rs.getInt("userId"));
 			user.setAccount(rs.getString("account"));
 			user.setFileName(rs.getString("fileName"));
+			user.setFacebookId(rs.getString("facebookId"));
 			
 			return user;
 		}
@@ -81,6 +82,20 @@ public class UserDao {
 	public User getUserByUserId(int userId) {
 		String sql="SELECT * FROM user where userId=?";
 		return this.jdbctemplate.queryForObject(sql, new Object[] {userId}, this.userMapper);
+	}
+
+	/**
+	 * facebookId로 가입한 유저인지 확인하고 가입된 유저를 돌려준다. 
+	 * @param fId
+	 * @return
+	 */
+	public User getUserByFId(String fId) {
+		String sql="SELECT * FROM user WHERE facebookId=?";
+		try{
+			return this.jdbctemplate.queryForObject(sql, new Object[] {fId}, this.userMapper);
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
 	}
 
 }
