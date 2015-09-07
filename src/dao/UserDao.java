@@ -39,7 +39,7 @@ public class UserDao {
 	};
 
 	public void createUser(User user) {
-		String sql = "INSERT INTO user (email, pw, name, account, fileName) values (?, ?,?,?, ?);";
+		String sql = "INSERT INTO user (email, pw, name, account, fileName) values (?,?,?,?,?);";
 		jdbctemplate.update(sql, user.getEmail(), user.getPassword(),
 				user.getName(), user.getAccount(), user.getFileName());
 	}
@@ -96,6 +96,11 @@ public class UserDao {
 		}catch(EmptyResultDataAccessException e){
 			return null;
 		}
+	}
+
+	public void createUserWithFacebookId(User user) {
+		String sql ="INSERT INTO user (facebookId, name, account) value (?,?,?)";
+		this.jdbctemplate.update(sql, user.getFacebookId(), user.getName(), user.getAccount());
 	}
 
 }

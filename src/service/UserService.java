@@ -30,6 +30,14 @@ public class UserService {
 		}
 		userDao.createUser(user);
 	}
+	
+	public void insertUser(User user, String account) throws Exception{
+		if (getUserJoinedByFacebook(user.getFacebookId()) != null) {
+			throw new Exception("이미 가입된 유저 메일. 가입 반려 ");
+		}
+		user.setAccount(account);
+		userDao.createUserWithFacebookId(user);
+	}
 
 	public boolean isExistUser(String email)  {
 		User resultUser = userDao.getUserByEmail(email);

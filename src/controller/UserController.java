@@ -99,9 +99,12 @@ public class UserController {
 			session.setAttribute("user", foundUser);
 			return "redirect:/index";
 		} else {
-			User user = new User(fId, fName);
-			model.addAttribute("user", user);
-			return "/signup/fbAccount";
+//			User user = new User(fId, fName);
+//			logger.debug("user:{}",user);
+//			model.addAttribute("user", user);
+			model.addAttribute("fId", fId);
+			model.addAttribute("name", fName);
+			return "/user/fbAccount";
 		}
 	}
 }
