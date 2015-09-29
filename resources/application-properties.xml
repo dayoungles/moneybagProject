@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>application-properties</comment>
+	<entry key="database.driverClassName">com.mysql.jdbc.Driver</entry>
+	<!-- mozzi 
+ 	<entry key="database.url">jdbc:mysql://128.199.238.60:3306/moneybag?useUnicode=true&amp;characterEncoding=utf8</entry> -->
+ 	<!-- java
+ 	<entry key="database.url">jdbc:mysql://125.209.193.18:3306/moneybag</entry> -->
+ 	<!--DB서  -->
+<!--  	<entry key="database.url">jdbc:mysql://125.209.195.232:3306/moneybag?useUnicode=true&amp;characterEncoding=utf8</entry> -->
+ 	 <!-- myserver -->
+ 	  <entry key="database.url">jdbc:mysql://128.199.90.94:3306/moneybag?useUnicode=true&amp;characterEncoding=utf8</entry>
+
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!before change server, MUST check user and password -->
+	<entry key="database.username">moneybag</entry>
+	<entry key="database.password">Moneybag123!@#</entry>
+	
+	<!-- mail send info  -->
+	<entry key="mail.host">smtp.gmail.com</entry>
+	<entry key="mail.port">587</entry>
+	<entry key="mail.username">make.work1234@gmail.com</entry>
+	<entry key="mail.password">YroyC8TpC3jWAp</entry>
+	<entry key="upload.path">/usr/apps/upload</entry>
+</properties>
