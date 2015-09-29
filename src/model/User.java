@@ -92,7 +92,7 @@ public class User {
 		return fileName;
 	}
 
-	public void setFileName(String fileName) {
+	public void setUserFileName(String fileName) {
 		this.fileName = fileName;
 	}
 

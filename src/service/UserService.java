@@ -8,18 +8,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
+import controller.NotExistException;
 import dao.UserDao;
 import dao.UserMappingDao;
+import exception.ValidException;
 
 @Service
 public class UserService {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(UserService.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	UserMappingDao userMappingDao;
 
@@ -30,8 +33,8 @@ public class UserService {
 		}
 		userDao.createUser(user);
 	}
-	
-	public void insertUser(User user, String account) throws Exception{
+
+	public void insertUser(User user, String account) throws Exception {
 		if (getUserJoinedByFacebook(user.getFacebookId()) != null) {
 			throw new Exception("이미 가입된 유저 메일. 가입 반려 ");
 		}
@@ -39,10 +42,10 @@ public class UserService {
 		userDao.createUserWithFacebookId(user);
 	}
 
-	public boolean isExistUser(String email)  {
+	public boolean isExistUser(String email) throws NotExistException {
 		User resultUser = userDao.getUserByEmail(email);
 		if (resultUser == null) {
-			return false;
+			throw new NotExistException("사용자가 존재하지 않습니다.");
 		}
 		return true;
 	}
@@ -55,19 +58,19 @@ public class UserService {
 	public User checkLoginValidation(User user) throws Exception {
 		// user정보가 있는지 확인-> isExistUser()
 		if (!isExistUser(user.getEmail())) {
-			throw new Exception("가입된 유저가 아니라고 ");
+			throw new NotExistException("가입된 유저가 아니라고 ");
 		} else {
 			User foundUser = selectUserByEmail(user.getEmail());
 			if (!foundUser.getPassword().equals(user.getPassword())) {
-				throw new Exception("비번이 안 맞아 난 비번을 생으로 가지고 있거든.");
+				throw new ValidException("비번이 안 맞아 난 비번을 생으로 가지고 있거든.");
 			}
 			return foundUser;
 		}
 	}
 
 	public boolean isExistUserByName(String name) {
-		User foundUser= userDao.getUserByName(name);
-		if(foundUser != null)
+		User foundUser = userDao.getUserByName(name);
+		if (foundUser != null)
 			return true;
 		return false;
 	}
@@ -81,9 +84,20 @@ public class UserService {
 	}
 
 	public User getUserJoinedByFacebook(String fId) {
-		return userDao.getUserByFId(fId); 
+		return userDao.getUserByFId(fId);
 
-		
+	}
+
+	public void checkSignupValidation(BindingResult result) throws ValidException {
+		// validation 에러 발생 시
+		if (result.hasErrors()) {
+			logger.info(" 유효성 에러 ");
+			List<ObjectError> list = result.getAllErrors();
+			for (ObjectError error : list) {
+				logger.debug("error:{}", error.getDefaultMessage());
+			}
+			throw new ValidException("validation exception ");
+		}
 	}
 
 }

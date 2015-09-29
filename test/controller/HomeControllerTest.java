@@ -1,5 +1,6 @@
 package controller;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import model.User;
 
@@ -31,8 +32,8 @@ public class HomeControllerTest {
 	@Test
 	public void getBagTest() {
 		// homeController.showHome(model, session);
-		homeService.getEnrolledBagListById(1);
-		verify(homeService).getEnrolledBagListById(1);
+//		homeService.getEnrolledBagListById(1);
+//		verify(homeService).getEnrolledBagListById(1);
 		session.setAttribute("User", new User());
 		// 정확하게 테스트 하고 싶은 것이 무엇인지 알아야 테스트 가능.
 		// session
@@ -40,4 +41,9 @@ public class HomeControllerTest {
 		// verify(session, times(1)).setAttribute("User", new User());
 	}
 
+	@Test
+	public void testString() throws Exception {
+		String text = "1+3";
+//		text.matches(regex);
+	}
 }

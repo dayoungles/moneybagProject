@@ -31,7 +31,7 @@ import service.UserService;
 public class SignupController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SignupController.class);
-
+	private static final String USER_IMG_FOLDER = "userImg/";
 	@Autowired
 	private UserService userService;
 
@@ -45,7 +45,7 @@ public class SignupController {
 	}
 
 	/*
-	 * User의 정보를 받아서 그 user를 db에 삽입 //
+	 * User의 정보를 받아서 그 user를 db에 삽입 
 	 * 
 	 * @return String "index"
 	 */
@@ -53,25 +53,28 @@ public class SignupController {
 	public String createUser(@Valid User user, BindingResult result, @RequestParam("multipartFile") MultipartFile file, Model model,
 			HttpSession session, HttpServletRequest request) throws Exception {
 
-		// validation 에러 발생 시
-		if (result.hasErrors()) {
-			logger.info(" 유효성 에러 ");
-			List<ObjectError> list = result.getAllErrors();
-			for (ObjectError error : list) {
-				logger.debug("error:{}", error.getDefaultMessage());
-			}
-			throw new ValidException("validation exception ");
+		try {
+			userService.isExistUser(user.getEmail()) ;
+			userService.checkSignupValidation(result);
+		} catch (NotExistException ne) {
+			ne.getMessage();
+			//TODO 에러 메세지 전달 
+//			model.addAttribute("message", ne.getMessage());
+			return "redirect:/errorPage/"+ne.getMessage();
+		}catch(ValidException ve){
+			model.addAttribute("message", ve.getMessage());
+			return "redirect:/errorPage"+ve.getMessage();
 		}
-		if (userService.isExistUser(user.getEmail())) throw new NotExistException("가입된 유저요 로그인 해 ");
-		FileUpload upload = uploadService.uploadFile(file, "userImg/");
-		user.setFileName(upload.getName());
+		
+		FileUpload uploaded = uploadService.uploadFileToFolder(file, USER_IMG_FOLDER);
+		user.setUserFileName(uploaded.getName());
 		userService.insertUser(user);
 
-		// 다음 페이지를 위한 작업
 		model.addAttribute(user);
 		session.setAttribute("user", userService.selectUserByEmail(user.getEmail()));
 		return "redirect:/index";
 	}
+
 
 	@RequestMapping("/testValid")
 	public String testValidation(@Valid User user, BindingResult result) {

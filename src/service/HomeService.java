@@ -1,5 +1,6 @@
 package service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,9 @@ public class HomeService {
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeService.class);
 
-	public List<Bag> getEnrolledBagListById(int userId) {
+	public List<Bag> getEnrolledBagListById(int userId) throws UnsupportedEncodingException {
 		List<Bag> bagList = bagDao.getEnrolledMoneybag(userId);
+		
 		return bagList;
 	}
 }

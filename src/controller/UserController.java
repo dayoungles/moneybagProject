@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import exception.ValidException;
 import service.UserService;
 
 @Controller
@@ -56,8 +57,15 @@ public class UserController {
 			}
 			return "redirect:/user/login";
 		}
-
-		User foundUser = userService.checkLoginValidation(user);
+		User foundUser ;
+		try {
+			foundUser = userService.checkLoginValidation(user);	
+		} catch (NotExistException e) {
+			return "redirect:/errorPage/"+e.getMessage();
+		} catch(ValidException e){
+			return "redirect:/errorPage/"+e.getMessage();
+		}
+		
 		if(foundUser != null){
 			session.setAttribute("user", foundUser);
 			return "redirect:/index";
@@ -99,9 +107,6 @@ public class UserController {
 			session.setAttribute("user", foundUser);
 			return "redirect:/index";
 		} else {
-//			User user = new User(fId, fName);
-//			logger.debug("user:{}",user);
-//			model.addAttribute("user", user);
 			model.addAttribute("fId", fId);
 			model.addAttribute("name", fName);
 			return "/user/fbAccount";

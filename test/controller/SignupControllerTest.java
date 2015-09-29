@@ -13,8 +13,8 @@ import dao.UserDao;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/applicationContext.xml")
 public class SignupControllerTest {
-	@Autowired
-	UserDao userDao;
+//	@Autowired
+//	UserDao userDao;
 
 	@Test
 	public void testCreateUser() {

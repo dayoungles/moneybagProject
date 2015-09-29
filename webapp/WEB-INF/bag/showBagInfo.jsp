@@ -10,19 +10,18 @@
 	<div class="billArea">
 		<c:forEach var="bill" items="${billList}">
 			<div class="bill" bill_id="${bill.bill_id}">
-				<div class="bag" id="${bill.id}" style="background-image:url(/bill_img/${bill.fileName}); ">
-				<!-- 이부분 imgsrc로 하는게 낫나?? -->
-				<div class="bill_info">
-					<p class="billName">${bill.billName}</p>
-					<p class="usedMoney">${bill.usedMoney}</p>
-					<p class="createdDate">${bill.createdDate}</p>
+				<div class="bill_img" id="${bill.bill_id}"
+					style="background-image:url(/bill_img/${bill.fileName}); ">
+					<!-- 이부분 imgsrc로 하는게 낫나?? -->
+					<div class="bill_info">
+						<p class="billName">${bill.billName}</p>
+						<p class="usedMoney">${bill.usedMoney}</p>
+						<p class="createdDate">${bill.createdDate}</p>
+					</div>
 				</div>
 			</div>
-
 		</c:forEach>
 	</div>
-
-
 </div>
 </container>
 <script src="../js/ajax.js"></script>

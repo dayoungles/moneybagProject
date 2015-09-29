@@ -46,7 +46,7 @@ public class AjaxController {
 	}
 
 	/**
-	 * 이미 가입된 유저인지 확인하는 함수. boolean값을 String으로 반환한다.
+	 * 이미 가입된 유저인지 확인하는 함수. 
 	 * 
 	 * @param name
 	 * @return boolean value in String
@@ -55,13 +55,16 @@ public class AjaxController {
 	// @RequestMapping(value="/addMember", method=RequestMethod.POST)
 	public @ResponseBody User testAddmember(@RequestParam("email") String email) {
 		User user = null;
-		if (userService.isExistUser(email)) {
-			user = userService.selectUserByEmail(email);
-			return user;
-			// return "{\"userId\":\"" + user.getId() + "\", \"userName\":\"" +
-			// user.getName() + "\"}";
-		} else {
-			return null;// /여기 처리하는 부분 때문에 자바스크립트에서 반드시 에러가 날 것이야
+		try {
+			if (userService.isExistUser(email)) {
+				return userService.selectUserByEmail(email);
+			} else {
+				return null;// /여기 처리하는 부분 때문에 자바스크립트에서 반드시 에러가 날 것이야
+			}
+		} catch (NotExistException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+			return null;
 		}
 	}
 
@@ -72,16 +75,16 @@ public class AjaxController {
 
 	@RequestMapping("/sendEmail")
 	public @ResponseBody String sendEmail(@RequestParam("email") String email, @RequestParam String msg, HttpSession session) {
-		logger.debug("email:{}, user:{}", email, (User) session.getAttribute("user"));
-		emailSender.sendJoinEmail((User) session.getAttribute("user"), email, msg);
+		User user = (User) session.getAttribute("user");
+		emailSender.sendJoinEmail(user, email, msg);
 		return "success";
 	}
 
 	@RequestMapping("/showBillDetail")
 	public @ResponseBody Bill showBillDetail(@RequestParam("bill_id") int bill_id) {
 		Bill bill = billService.getBillByBill_id(bill_id);
-		// 빌에 대한 댓글도 찾아오기
-		// bill을 json으로 만들어서 return 해주기
+		// TODO 빌에 대한 댓글도 찾아오기
+		// TODO bill을 json으로 만들어서 return 해주기
 
 		return bill;
 	}

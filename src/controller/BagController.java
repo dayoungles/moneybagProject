@@ -52,7 +52,7 @@ public class BagController {
 	public String moneybagForm() {
 		return "/bag/bagForm";
 	}
-
+	
 	/**
 	 * 머니백 생성할 때 쓰는 함수. createForm에서 온다.
 	 * 
@@ -68,15 +68,10 @@ public class BagController {
 	@RequestMapping(value = "/createBag", method = RequestMethod.POST)
 	public String createBag(@RequestParam("info") String info, @RequestParam("userList") String userIdList, @RequestParam("file") MultipartFile file,
 			HttpSession session, HttpServletRequest request) throws Exception {
-		// user session get
 		User user = (User) session.getAttribute("user");
-		// ServletContext sc = request.getServletContext();
-		// file upload
-		FileUpload upload = uploadService.uploadFile(file, this.imgFolder);
-		// make bag
+		FileUpload upload = uploadService.uploadFileToFolder(file, this.imgFolder);
 		Bag bag = new Bag(user.getId(), user.getAccount(), info, upload.getName());
 		Bag foundBag = bagService.createBag(bag);
-		// enroll members
 		enrollService.enrollUser(new BagMember(userIdList, user.getId()), foundBag.getId());
 		return "redirect:/index";
 	}
@@ -93,7 +88,6 @@ public class BagController {
 	public String showBag(@PathVariable("bagId") int bagId, HttpSession session, Model model) {
 		Bag bag = bagService.findBagByBagId(bagId);
 		List<Bill> billList = billService.findAllBillsByBagId(bagId);
-		logger.debug("bag:{}", bag);
 		model.addAttribute("billList", billList);
 		model.addAttribute("bag", bag);
 		return "/bag/showBagInfo";

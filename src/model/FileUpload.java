@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
 public class FileUpload {
 	private final String DEFAULT = "default.png";
 	private final int ZERO = 0;
@@ -16,16 +17,20 @@ public class FileUpload {
 	public FileUpload(){
 		
 	}
-	public FileUpload(MultipartFile file2) {
-		this.multipartFile = file2;
-		isFileExist(file2);
+	public FileUpload(MultipartFile file) {
+		this.multipartFile = file;
+		setFileName(file);
 	}
 	
-	private void isFileExist(MultipartFile file2) {
-		if(file2.isEmpty()){
+	public boolean isFileExist(){
+		return this.multipartFile.isEmpty();
+	}
+	
+	private void setFileName(MultipartFile file) {
+		if(file.isEmpty()){
 			this.nameOfmf = DEFAULT;
 		}else {
-			setName();
+			makeUniqFileName();
 		}
 	}
 	
@@ -33,18 +38,16 @@ public class FileUpload {
 		return multipartFile;
 	}
 
-	public void setFile(MultipartFile file) {
-		this.multipartFile = file;
-	}
-
 	public String getName() {
 		return nameOfmf;
 	}
 	
 	/**
-	 * 파일 이름 중복 제거를 위해 파일 업로드 시각 으로 파일 이름을 다시 지정한다. 
+	 * 파일 이름 중복 제거를 위해 파일 업로드 시각으로 파일 이름을 다시 지정한다.
+	 * UUID이용하도록 변경 예정  
 	 */
-	public void setName() {
+	public void makeUniqFileName() {
+		//TO DO
 		Date now = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("yy-MM-dd_HH:mm:ss:SSS");
 		date.format(now);

@@ -18,15 +18,14 @@ public class UploadService {
 	private static final Logger logger = LoggerFactory.getLogger(UploadService.class);
 	private static final String NO_FILE = "default.png";
 	public static String path;
-	
-//	private String uploadPath;
-//	
-//	@Value("${upload.path}")
-//	public void setUploadPath(String uploadPath) {
-//		this.uploadPath = uploadPath;
-//	}
-	
-	
+//sample code 
+	// private String uploadPath;
+	//
+	// @Value("${upload.path}")
+	// public void setUploadPath(String uploadPath) {
+	// this.uploadPath = uploadPath;
+	// }
+
 	/**
 	 * file upload. 업로드할 위치
 	 * 
@@ -35,28 +34,24 @@ public class UploadService {
 	 * @param filePos
 	 *            ; 파일이 들어갈 폴더명
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public FileUpload uploadFile(MultipartFile mfile, String filePos) throws NotImgException{
-		if (isImgFile(mfile) == false) {
-			throw new NotImgException("not img file");
-		}
-		// file을 업로드 하려고 하는 폴더가 없으면 만들어준다.
-		File folder = new File(this.path+filePos);
-		if (!folder.exists()) {
-			folder.mkdirs();
-		}
-		
-		FileUpload upload = new FileUpload(mfile);
-		String path = this.path+filePos+upload.getName();
-		logger.debug(path+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		if(upload.getName().equals(NO_FILE)){
-			logger.info("default?");
-			return upload;
-		}
-		
-		File file = new File(this.path + filePos+ upload.getName());
-		
+	public FileUpload uploadFileToFolder(MultipartFile mfile, String filePos) throws NotImgException {
+		checkImgException(mfile);
+		checkUploadPathExist(filePos);
+
+		FileUpload preparedFile = new FileUpload(mfile);
+
+		if (preparedFile.isFileExist()) {
+			uploadFile(mfile, filePos, preparedFile);
+		} 
+		return preparedFile;
+	}
+
+	private void uploadFile(MultipartFile mfile, String filePos, FileUpload preparedFile) {
+		String uploadPath = this.path + filePos + preparedFile.getName();
+		File file = new File(uploadPath);
+
 		try {
 			mfile.transferTo(file);
 		} catch (IllegalStateException e) {
@@ -64,7 +59,19 @@ public class UploadService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return upload;
+	}
+
+	private void checkImgException(MultipartFile mfile) throws NotImgException {
+		if (isImgFile(mfile) == false) {
+			throw new NotImgException("이미지 파일을 업로드 하세요");
+		}
+	}
+
+	private void checkUploadPathExist(String filePos) {
+		File folder = new File(this.path + filePos);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
 	}
 
 	public boolean isImgFile(MultipartFile file) {

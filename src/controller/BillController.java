@@ -45,9 +45,7 @@ public class BillController {
 			HttpServletRequest request, HttpSession session) throws Exception {
 		
 		User user = (User) session.getAttribute("user");
-//		Bill bill = new Bill(billName, usedMoney, info, Integer.parseInt(bagId));
-		
-		FileUpload upload = uploadService.uploadFile(file, this.imgFolder);
+		FileUpload upload = uploadService.uploadFileToFolder(file, this.imgFolder);
 		bill.setFileName(upload.getName());
 		bill.setMoneybagId(Integer.parseInt(bagId));
 		

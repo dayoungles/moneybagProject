@@ -1,7 +1,7 @@
 package model;
 
 public class Email {
-	public String subject = "Your friend "+ this.user + "invited you to join moneybag service";
+	public String subject = "Your friend "+ this.user + " invited you to join moneybag service";
 	public String bodyText="join moneybag Service by click under validation code.";
 	public final String from = "make.work1234@gmail.com";
 	public String user;

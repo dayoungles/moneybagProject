@@ -1,7 +1,7 @@
 from fabric.api import env,execute
 from fabric.operations import local
  
-env.catalina_home="..."
+env.catalina_home="/Users/dayoungle/"
  
 def hostname():
     local('uname -a')
@@ -23,3 +23,6 @@ def deploy():
     execute(stop)
     execute(copy)
     execute(start)
+
+def sysout():
+	print("apfhd")

@@ -30,7 +30,7 @@ public class UserDao {
 			user.setPassword(rs.getString("pw"));
 			user.setId(rs.getInt("userId"));
 			user.setAccount(rs.getString("account"));
-			user.setFileName(rs.getString("fileName"));
+			user.setUserFileName(rs.getString("fileName"));
 			user.setFacebookId(rs.getString("facebookId"));
 			
 			return user;
