@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+
+div.hide, .hide1, .hide2{
+		display:none;
+	}
+	
+	div.no_hide1, .no_hide2{
+		display:block;
+	}
+	
+	div.popup{
+		width:70%;
+		height:50%;
+		position:static;
+		margin:0px auto;
+		background-color: #000;		
+	}
+	div.noUser{
+		width:30%;
+		height:10%;
+		position:static;
+		margin: 0px auto;
+		background-color: #eee;
+		padding:100px;
+	}
+	span.noUserMsg{
+		padding:100px;
+	}
+	div.button{
+		background-color: gray;
+		border-radius: 5px;
+	}

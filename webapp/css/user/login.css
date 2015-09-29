@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+div.loginBox, div.signupBox{
+	width:50%;
+	height:40%;
+	background:#d4efb8;
+	margin: 0px auto;
+	position:relative;
+}
+
+.input{
+	border:none;/*??요러면 되던가 */
+	position:relative;
+	width: 60%;
+	height:15%;
+	margin: 0px auto;
+	font-size:20px;
+	/*폰트 바꿔라 */
+	background:#d4efb8;
+	
+}
+
+button , input.button{
+	position:relative;
+	width:50%;
+	height:30px;
+}
+
+div.box{
+	margin:0px auto;
+	width:60%;
+/*높이 정렬 어떻게 하더라 ㄷ ㄷ ㄷ */
+}
